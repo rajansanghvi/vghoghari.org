@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
-  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.4\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.4\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -45,10 +45,40 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.7\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.3.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.3.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.3.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.3.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.3.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.3.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.4\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -67,9 +97,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
     </Reference>
@@ -111,39 +138,22 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="WebGrease">
-      <Private>True</Private>
-      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
-    </Reference>
-    <Reference Include="Antlr3.Runtime">
-      <Private>True</Private>
-      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.ApplicationInsights">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.Agent.Intercept">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.DependencyCollector">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.PerfCounterCollector">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.WindowsServer">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.AI.Web">
-      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="AppCode\BusinessLayer\SessionBL.cs" />
+    <Compile Include="AppCode\BusinessLayer\UserBL.cs" />
+    <Compile Include="AppCode\DataLayer\GlobalDL.cs" />
+    <Compile Include="AppCode\DataLayer\SessionDL.cs" />
+    <Compile Include="AppCode\DataLayer\UserDL.cs" />
+    <Compile Include="AppCode\Models\Enum.cs" />
+    <Compile Include="AppCode\Models\Struts.cs" />
+    <Compile Include="AppCode\Models\User.cs" />
+    <Compile Include="AppCode\Utilities\DateUtility.cs" />
+    <Compile Include="AppCode\Utilities\UserSessionUtility.cs" />
+    <Compile Include="AppCode\Utilities\Utility.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -176,7 +186,9 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\ExternalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -184,14 +196,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AppCode\Database\schema_update.sql" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\ResourceModel.cshtml" />
@@ -214,12 +227,269 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Theme\api\config.php" />
+    <Content Include="Theme\api\tweet.php" />
+    <Content Include="Theme\api\twitteroauth\OAuth.php" />
+    <Content Include="Theme\api\twitteroauth\twitteroauth.php" />
+    <Content Include="Theme\colors\color1.css" />
+    <Content Include="Theme\colors\color10.css" />
+    <Content Include="Theme\colors\color2.css" />
+    <Content Include="Theme\colors\color3.css" />
+    <Content Include="Theme\colors\color4.css" />
+    <Content Include="Theme\colors\color5.css" />
+    <Content Include="Theme\colors\color6.css" />
+    <Content Include="Theme\colors\color7.css" />
+    <Content Include="Theme\colors\color8.css" />
+    <Content Include="Theme\colors\color9.css" />
+    <Content Include="Theme\css\animations.css" />
+    <Content Include="Theme\css\bootstrap.css" />
+    <Content Include="Theme\css\custom.css" />
+    <Content Include="Theme\css\extralayers.css" />
+    <Content Include="Theme\css\font-awesome.css" />
+    <Content Include="Theme\css\fonts\fontawesome-webfont.svg" />
+    <Content Include="Theme\css\ie8.css" />
+    <Content Include="Theme\css\navstylechange.css" />
+    <Content Include="Theme\css\style.css" />
+    <Content Include="Theme\images\.logo~imageoptim.png" />
+    <Content Include="Theme\images\album-cover.png" />
+    <Content Include="Theme\images\album-disk.png" />
+    <Content Include="Theme\images\assets\ajax-loader.gif" />
+    <Content Include="Theme\images\assets\error.gif" />
+    <Content Include="Theme\images\assets\success.gif" />
+    <Content Include="Theme\images\checkers.png" />
+    <Content Include="Theme\images\loader.gif" />
+    <Content Include="Theme\images\logo%402x.png" />
+    <Content Include="Theme\images\logo.png" />
+    <Content Include="Theme\images\pattern.png" />
+    <Content Include="Theme\images\patterns\pt1.png" />
+    <Content Include="Theme\images\patterns\pt10.png" />
+    <Content Include="Theme\images\patterns\pt11.jpg" />
+    <Content Include="Theme\images\patterns\pt12.jpg" />
+    <Content Include="Theme\images\patterns\pt13.jpg" />
+    <Content Include="Theme\images\patterns\pt14.jpg" />
+    <Content Include="Theme\images\patterns\pt15.jpg" />
+    <Content Include="Theme\images\patterns\pt2.png" />
+    <Content Include="Theme\images\patterns\pt3.png" />
+    <Content Include="Theme\images\patterns\pt4.png" />
+    <Content Include="Theme\images\patterns\pt5.png" />
+    <Content Include="Theme\images\patterns\pt6.png" />
+    <Content Include="Theme\images\patterns\pt7.png" />
+    <Content Include="Theme\images\patterns\pt8.png" />
+    <Content Include="Theme\images\patterns\pt9.png" />
+    <Content Include="Theme\js\bootstrap.js" />
+    <Content Include="Theme\js\helper-plugins.js" />
+    <Content Include="Theme\js\init.js" />
+    <Content Include="Theme\js\jquery-2.0.0.min.js" />
+    <Content Include="Theme\js\modernizr.js" />
+    <Content Include="Theme\js\waypoints.js" />
+    <Content Include="Theme\mail\contact.php" />
+    <Content Include="Theme\plugins\countdown\js\jquery.countdown.min.js" />
+    <Content Include="Theme\plugins\flexslider\css\flexslider.css" />
+    <Content Include="Theme\plugins\flexslider\js\jquery.flexslider.js" />
+    <Content Include="Theme\plugins\fullcalendar\changelog.txt" />
+    <Content Include="Theme\plugins\fullcalendar\fullcalendar.css" />
+    <Content Include="Theme\plugins\fullcalendar\fullcalendar.js" />
+    <Content Include="Theme\plugins\fullcalendar\fullcalendar.min.css" />
+    <Content Include="Theme\plugins\fullcalendar\fullcalendar.min.js" />
+    <Content Include="Theme\plugins\fullcalendar\fullcalendar.print.css" />
+    <Content Include="Theme\plugins\fullcalendar\gcal.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang-all.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\ar-ma.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\ar-sa.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\ar.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\bg.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\ca.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\cs.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\da.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\de-at.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\de.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\el.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\en-au.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\en-ca.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\en-gb.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\es.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\fa.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\fi.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\fr-ca.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\fr.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\hi.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\hr.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\hu.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\id.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\is.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\it.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\ja.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\ko.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\lt.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\lv.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\nl.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\pl.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\pt-br.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\pt.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\ro.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\ru.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\sk.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\sl.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\sr-cyrl.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\sr.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\sv.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\th.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\tr.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\uk.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\vi.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\zh-cn.js" />
+    <Content Include="Theme\plugins\fullcalendar\lang\zh-tw.js" />
+    <Content Include="Theme\plugins\fullcalendar\lib\cupertino\images\animated-overlay.gif" />
+    <Content Include="Theme\plugins\fullcalendar\lib\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+    <Content Include="Theme\plugins\fullcalendar\lib\cupertino\images\ui-bg_flat_15_cd0a0a_40x100.png" />
+    <Content Include="Theme\plugins\fullcalendar\lib\cupertino\images\ui-bg_glass_100_e4f1fb_1x400.png" />
+    <Content Include="Theme\plugins\fullcalendar\lib\cupertino\images\ui-bg_glass_50_3baae3_1x400.png" />
+    <Content Include="Theme\plugins\fullcalendar\lib\cupertino\images\ui-bg_glass_80_d7ebf9_1x400.png" />
+    <Content Include="Theme\plugins\fullcalendar\lib\cupertino\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+    <Content Include="Theme\plugins\fullcalendar\lib\cupertino\images\ui-bg_highlight-hard_70_000000_1x100.png" />
+    <Content Include="Theme\plugins\fullcalendar\lib\cupertino\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
+    <Content Include="Theme\plugins\fullcalendar\lib\cupertino\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+    <Content Include="Theme\plugins\fullcalendar\lib\cupertino\images\ui-icons_2694e8_256x240.png" />
+    <Content Include="Theme\plugins\fullcalendar\lib\cupertino\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Theme\plugins\fullcalendar\lib\cupertino\images\ui-icons_3d80b3_256x240.png" />
+    <Content Include="Theme\plugins\fullcalendar\lib\cupertino\images\ui-icons_72a7cf_256x240.png" />
+    <Content Include="Theme\plugins\fullcalendar\lib\cupertino\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Theme\plugins\fullcalendar\lib\cupertino\jquery-ui.min.css" />
+    <Content Include="Theme\plugins\fullcalendar\lib\jquery-ui.custom.min.js" />
+    <Content Include="Theme\plugins\fullcalendar\lib\jquery.min.js" />
+    <Content Include="Theme\plugins\fullcalendar\lib\moment.min.js" />
+    <Content Include="Theme\plugins\fullcalendar\license.txt" />
+    <Content Include="Theme\plugins\mediaelement\background.png" />
+    <Content Include="Theme\plugins\mediaelement\bigplay.png" />
+    <Content Include="Theme\plugins\mediaelement\bigplay.svg" />
+    <Content Include="Theme\plugins\mediaelement\controls-ted.png" />
+    <Content Include="Theme\plugins\mediaelement\controls-wmp-bg.png" />
+    <Content Include="Theme\plugins\mediaelement\controls-wmp.png" />
+    <Content Include="Theme\plugins\mediaelement\controls.png" />
+    <Content Include="Theme\plugins\mediaelement\controls.svg" />
+    <Content Include="Theme\plugins\mediaelement\flashmediaelement-cdn.swf" />
+    <Content Include="Theme\plugins\mediaelement\flashmediaelement.swf" />
+    <Content Include="Theme\plugins\mediaelement\loading.gif" />
+    <Content Include="Theme\plugins\mediaelement\mediaelement-and-player.min.js" />
+    <Content Include="Theme\plugins\mediaelement\mediaelementplayer.css" />
+    <Content Include="Theme\plugins\mediaelement\mejs-skins.css" />
+    <Content Include="Theme\plugins\nivoslider\jquery.nivo.slider.js" />
+    <Content Include="Theme\plugins\nivoslider\jquery.nivo.slider.pack.js" />
+    <Content Include="Theme\plugins\nivoslider\nivo-slider.css" />
+    <Content Include="Theme\plugins\nivoslider\themes\default\arrows.png" />
+    <Content Include="Theme\plugins\nivoslider\themes\default\bullets.png" />
+    <Content Include="Theme\plugins\nivoslider\themes\default\default.css" />
+    <Content Include="Theme\plugins\nivoslider\themes\default\loading.gif" />
+    <Content Include="Theme\plugins\prettyphoto\css\prettyPhoto.css" />
+    <Content Include="Theme\plugins\prettyphoto\images\dark_rounded\btnNext.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\dark_rounded\btnPrevious.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\dark_rounded\contentPattern.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\dark_rounded\default_thumbnail.gif" />
+    <Content Include="Theme\plugins\prettyphoto\images\dark_rounded\loader.gif" />
+    <Content Include="Theme\plugins\prettyphoto\images\dark_rounded\sprite.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\dark_square\btnNext.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\dark_square\btnPrevious.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\dark_square\contentPattern.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\dark_square\default_thumbnail.gif" />
+    <Content Include="Theme\plugins\prettyphoto\images\dark_square\loader.gif" />
+    <Content Include="Theme\plugins\prettyphoto\images\dark_square\sprite.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\default\default_thumb.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\default\loader.gif" />
+    <Content Include="Theme\plugins\prettyphoto\images\default\sprite.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\default\sprite_next.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\default\sprite_prev.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\default\sprite_x.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\default\sprite_y.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\facebook\btnNext.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\facebook\btnPrevious.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\facebook\contentPatternBottom.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\facebook\contentPatternLeft.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\facebook\contentPatternRight.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\facebook\contentPatternTop.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\facebook\default_thumbnail.gif" />
+    <Content Include="Theme\plugins\prettyphoto\images\facebook\loader.gif" />
+    <Content Include="Theme\plugins\prettyphoto\images\facebook\sprite.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\light_rounded\btnNext.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\light_rounded\btnPrevious.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\light_rounded\default_thumbnail.gif" />
+    <Content Include="Theme\plugins\prettyphoto\images\light_rounded\loader.gif" />
+    <Content Include="Theme\plugins\prettyphoto\images\light_rounded\sprite.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\light_square\btnNext.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\light_square\btnPrevious.png" />
+    <Content Include="Theme\plugins\prettyphoto\images\light_square\default_thumbnail.gif" />
+    <Content Include="Theme\plugins\prettyphoto\images\light_square\loader.gif" />
+    <Content Include="Theme\plugins\prettyphoto\images\light_square\sprite.png" />
+    <Content Include="Theme\plugins\prettyphoto\js\prettyphoto-v3.1.5.js" />
+    <Content Include="Theme\plugins\prettyphoto\js\prettyphoto.js" />
+    <Content Include="Theme\plugins\rs-plugin\assets\arrowleft.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\arrowright.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\arrow_large_left.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\arrow_large_right.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\arrow_left.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\arrow_left2.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\arrow_right.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\arrow_right2.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\black50.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\boxed_bgtile.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\bullet.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\bullets.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\bullets2.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\bullet_boxed.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\coloredbg.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\grain.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\gridtile.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\gridtile_3x3.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\gridtile_3x3_white.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\gridtile_white.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\large_left.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\large_right.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\loader.gif" />
+    <Content Include="Theme\plugins\rs-plugin\assets\loader2.gif" />
+    <Content Include="Theme\plugins\rs-plugin\assets\navigdots.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\navigdots_bgtile.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\shadow1.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\shadow2.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\shadow3.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\small_left.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\small_left_boxed.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\small_right.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\small_right_boxed.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\timer.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\timerdot.png" />
+    <Content Include="Theme\plugins\rs-plugin\assets\transparent.jpg" />
+    <Content Include="Theme\plugins\rs-plugin\assets\white50.png" />
+    <Content Include="Theme\plugins\rs-plugin\css\settings-ie8.css" />
+    <Content Include="Theme\plugins\rs-plugin\css\settings.css" />
+    <Content Include="Theme\plugins\rs-plugin\font\revicons.svg" />
+    <Content Include="Theme\plugins\rs-plugin\images\decor_inside.png" />
+    <Content Include="Theme\plugins\rs-plugin\images\decor_inside_white.png" />
+    <Content Include="Theme\plugins\rs-plugin\images\decor_testimonial.png" />
+    <Content Include="Theme\plugins\rs-plugin\images\gradient\g30.png" />
+    <Content Include="Theme\plugins\rs-plugin\images\gradient\g40.png" />
+    <Content Include="Theme\plugins\rs-plugin\js\jquery.themepunch.enablelog.js" />
+    <Content Include="Theme\plugins\rs-plugin\js\jquery.themepunch.revolution.js" />
+    <Content Include="Theme\plugins\rs-plugin\js\jquery.themepunch.revolution.min.js" />
+    <Content Include="Theme\plugins\rs-plugin\js\jquery.themepunch.tools.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -234,25 +504,55 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Theme\api\.DS_Store" />
+    <Content Include="Theme\colors\.DS_Store" />
+    <Content Include="Theme\css\.DS_Store" />
+    <Content Include="Theme\css\fonts\.DS_Store" />
+    <Content Include="Theme\css\fonts\fontawesome-webfont.eot" />
+    <Content Include="Theme\css\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Theme\css\fonts\fontawesome-webfont.woff" />
+    <Content Include="Theme\css\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Theme\css\fonts\FontAwesome.otf" />
+    <Content Include="Theme\images\.DS_Store" />
+    <Content Include="Theme\js\.DS_Store" />
+    <Content Include="Theme\plugins\.DS_Store" />
+    <Content Include="Theme\plugins\countdown\.DS_Store" />
+    <Content Include="Theme\plugins\flexslider\.DS_Store" />
+    <Content Include="Theme\plugins\fullcalendar\.DS_Store" />
+    <Content Include="Theme\plugins\fullcalendar\lib\.DS_Store" />
+    <Content Include="Theme\plugins\mediaelement\silverlightmediaelement.xap" />
+    <Content Include="Theme\plugins\nivoslider\.DS_Store" />
+    <Content Include="Theme\plugins\nivoslider\themes\.DS_Store" />
+    <Content Include="Theme\plugins\prettyphoto\.DS_Store" />
+    <Content Include="Theme\plugins\prettyphoto\images\.DS_Store" />
+    <Content Include="Theme\plugins\prettyphoto\js\.DS_Store" />
+    <Content Include="Theme\plugins\rs-plugin\.DS_Store" />
+    <Content Include="Theme\plugins\rs-plugin\assets\.DS_Store" />
+    <Content Include="Theme\plugins\rs-plugin\assets\arrows.psd" />
+    <Content Include="Theme\plugins\rs-plugin\assets\bullets.psd" />
+    <Content Include="Theme\plugins\rs-plugin\assets\small_arrows.psd" />
+    <Content Include="Theme\plugins\rs-plugin\css\.DS_Store" />
+    <Content Include="Theme\plugins\rs-plugin\font\.DS_Store" />
+    <Content Include="Theme\plugins\rs-plugin\font\revicons.eot" />
+    <Content Include="Theme\plugins\rs-plugin\font\revicons.ttf" />
+    <Content Include="Theme\plugins\rs-plugin\font\revicons.woff" />
+    <Content Include="Theme\plugins\rs-plugin\images\.DS_Store" />
+    <Content Include="Theme\plugins\rs-plugin\js\.DS_Store" />
+    <Content Include="Views\User\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Folder Include="Theme\audio\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -286,8 +586,8 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.4\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.4\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
