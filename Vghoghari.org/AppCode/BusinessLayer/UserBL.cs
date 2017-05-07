@@ -11,15 +11,23 @@ using static Vghoghari.org.AppCode.Models.Enum;
 namespace Vghoghari.org.AppCode.BusinessLayer {
 	public class UserBL {
 		private static readonly string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.ToString();
+		private const string REGEX_FULLNAME = @"^(-?([A-Z].\s)?([A-Z][a-z]+)\s?)+([A-Z]'([A-Z][a-z]+))?$";
+		private const string REGEX_USERNAME = @"^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$";
+		private const string REGEX_PASSWORD = @"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$";
+		private const string REGEX_MOBILE_NUMBER = @"^[789]\d{9}$";
+		private const string REGEX_EMAIL_ID = @"^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$";
 
 		private static enRegistrationResponse ValidateRegistrationData(string fullName, string username, string password, string confirmedPassword, string mobileNumber, string emailId, string religion) {
+
+			// Fullname can consists only alphabets. this regex is not case sensitive
 			if (string.IsNullOrWhiteSpace(fullName)
-				|| !Regex.IsMatch(fullName, @"^([A-Za-z]{1,})([ ]{0,1})([A-Za-z]{1,})?([ ]{0,1})?([A-Za-z]{1,})?([ ]{0,1})?([A-Za-z]{1,})$")) {
+				|| !Regex.IsMatch(fullName, REGEX_FULLNAME, RegexOptions.IgnoreCase)) {
 				return enRegistrationResponse.DataValidationError;
 			}
 
+			// Usernames can contain characters a-z, 0-9, underscores and periods. The username cannot start with a period nor end with a period. It must also not have more than one period sequentially. Max length is 30 chars.
 			if (string.IsNullOrWhiteSpace(username)
-				|| !Regex.IsMatch(username, @"^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$")) {
+				|| !Regex.IsMatch(username, REGEX_USERNAME)) {
 				return enRegistrationResponse.DataValidationError;
 			}
 			else {
@@ -29,8 +37,9 @@ namespace Vghoghari.org.AppCode.BusinessLayer {
 				}
 			}
 
+			// at least 8 characters, must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number, Can contain special characters
 			if (string.IsNullOrWhiteSpace(password)
-				|| !Regex.IsMatch(password, @"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#£€*?&]{8,16}$")) {
+				|| !Regex.IsMatch(password, REGEX_PASSWORD)) {
 				return enRegistrationResponse.DataValidationError;
 			}
 
@@ -38,21 +47,18 @@ namespace Vghoghari.org.AppCode.BusinessLayer {
 				return enRegistrationResponse.DataValidationError;
 			}
 
+			// only 10 digits starting with 7,8 or 9
 			if (string.IsNullOrWhiteSpace(mobileNumber)
-				|| !Regex.IsMatch(mobileNumber, @"^(\+)?(\d){0,3}( )?\d{4,15}$")) {
+				|| !Regex.IsMatch(mobileNumber, REGEX_MOBILE_NUMBER)) {
 				return enRegistrationResponse.DataValidationError;
 			}
 
+			// valid email id.
 			if (!string.IsNullOrWhiteSpace(emailId)
-				&& !Regex.IsMatch(emailId, @"^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$")) {
+				&& !Regex.IsMatch(emailId, REGEX_EMAIL_ID)) {
 				return enRegistrationResponse.DataValidationError;
 			}
-
-			if (!string.IsNullOrWhiteSpace(religion)
-				&& !Regex.IsMatch(religion, @"^(?=.*[a-zA-Z\d].*)[a-zA-Z\d !@#$%&*()\-_+=:;""',./?]{2,}$")) {
-				return enRegistrationResponse.DataValidationError;
-			}
-
+			
 			return enRegistrationResponse.Ok;
 		}
 
@@ -85,9 +91,14 @@ namespace Vghoghari.org.AppCode.BusinessLayer {
 				return response;
 			}
 
-			enUserType userType = enUserType.User; //By default all users that register to the website are created as Users and not admin or super admins
+			// By default all users that register to the website are created with User Role
+			enUserType userType = enUserType.User; 
 			string hashedPassword = Utility.GetMd5Hash(password);
 			KeyValuePair<string, string> appKeys = GenerateUniqueAppKeys();
+
+			if(!string.IsNullOrWhiteSpace(religion)) {
+				religion = Utility.RemoveHtml(religion);
+			}
 
 			int userId = UserDL.AddUserDetails(fullName, username, hashedPassword, appKeys.Key, appKeys.Value, userType, mobileNumber, emailId, religion);
 
@@ -101,12 +112,12 @@ namespace Vghoghari.org.AppCode.BusinessLayer {
 
 		private static enLoginResponse ValidateLoginData(string username, string password) {
 			if (string.IsNullOrWhiteSpace(username)
-				|| !Regex.IsMatch(username, @"^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$")) {
+				|| !Regex.IsMatch(username, REGEX_USERNAME)) {
 				return enLoginResponse.DataValidationError;
 			}
 
 			if (string.IsNullOrWhiteSpace(password)
-				|| !Regex.IsMatch(password, @"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#£€*?&]{8,16}$")) {
+				|| !Regex.IsMatch(password, REGEX_PASSWORD)) {
 				return enLoginResponse.DataValidationError;
 			}
 

@@ -8,13 +8,13 @@
   , auth_key varchar(40) not null
   , user_type tinyint(4) not null default 1
   , mobile_number varchar(20) not null
-  , email_id varchar(255) not null
-  , religion varchar(255) not null
-  , deleted tinyint(4) DEFAULT 0
+  , email_id varchar(255) null
+  , religion varchar(255) null
+  , deleted tinyint(4) default 0
   , created_by varchar(255) not null
-  , created_date timestamp default current_timestamp
+  , created_date datetime default now()
   , modified_by varchar(255) null
-  , modified_date timestamp null
+  , modified_date datetime null
 )engine innoDb charset=Utf8;
 
 
@@ -50,11 +50,13 @@ create TABLE if not exists app_sessions
   id int(11) AUTO_INCREMENT primary key
   , user_id int(11) not null
   , session_id varchar(255) not null
-  , expiry_date timestamp default current_timestamp()
+  , expiry_date datetime default now()
   , user_agent varchar(1000) null
   , deleted tinyint(4) not null default 0
-  , created_date timestamp default current_timestamp()
-  , modified_date timestamp null
+  , created_by varchar(255) not null
+  , created_date datetime default now()
+  , modified_by varchar(255) null
+  , modified_date datetime null
 )engine innoDb charset = utf8;
 
 drop procedure if exists addIndex;

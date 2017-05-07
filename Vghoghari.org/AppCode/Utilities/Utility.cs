@@ -529,5 +529,10 @@ namespace Vghoghari.org.AppCode.Utilities {
 
 			return internalNumbers.Contains(phoneNumber) || phoneNumber.StartsWith("556677");
 		}
+
+		internal static string RemoveHtml(string input) {
+			string noHtml = Regex.Replace(input, @"<[^>]+>|&nbsp;", "").Trim();
+			return Regex.Replace(noHtml, @"\s{2,}", " ");
+		}
 	}
 }

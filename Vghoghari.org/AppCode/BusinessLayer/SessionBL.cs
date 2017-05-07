@@ -10,11 +10,11 @@ namespace Vghoghari.org.AppCode.BusinessLayer {
 		private static readonly string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.ToString();
 
 		public static void DeleteSessions(int userId) {
-			SessionDL.DeleteSessions(userId);
+			SessionDL.DeleteSessions(userId, "system");
 		}
 
 		public static void CreateSession(Session session) {
-			SessionDL.AddSession(session);
+			SessionDL.AddSession(session, "system");
 		}
 	}
 }

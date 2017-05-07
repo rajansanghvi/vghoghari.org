@@ -36,7 +36,7 @@ namespace Vghoghari.org.AppCode.DataLayer {
 			using (MySqlDataReader dr = dl.ExecuteSqlReturnReader(Utility.ConnectionString, sql)) {
 				while (dr.Read()) {
 					deviceIds.Add(dr.GetString("device_id"));
-					authKeys.Add(dr.GetString("authKey"));
+					authKeys.Add(dr.GetString("auth_key"));
 				}
 			}
 
@@ -47,7 +47,7 @@ namespace Vghoghari.org.AppCode.DataLayer {
 			const string sql = @"insert into app_users
 														(fullname, username, hashed_password, device_id, auth_key, user_type, mobile_number, email_id, religion, deleted, created_by, created_date, modified_by, modified_date)
 														values
-														(?fullName, ?username, ?hashedPassword, ?deviceId, ?authKey, ?userType, ?mobileNumber, ?emailId, ?religion, 0, ?username, current_timestamp(), null, null);
+														(?fullName, ?username, ?hashedPassword, ?deviceId, ?authKey, ?userType, ?mobileNumber, ?emailId, ?religion, 0, ?username, now(), null, null);
 														select LAST_INSERT_ID();";
 
 			GlobalDL dl = new GlobalDL();
@@ -66,13 +66,10 @@ namespace Vghoghari.org.AppCode.DataLayer {
 
 		internal static User FetchUser(string username, string hashedPassword) {
 			const string sql = @"select    id as id
-																			, ifnull(fullname, '') as fullname
 																			, ifnull(username, '') as username
 																			, ifnull(device_id, '') as device_id
 																			, ifnull(auth_key, '') as auth_key
 																			, ifnull(user_type, 1) as user_type
-																			, ifnull(mobile_number, '') as mobile_number
-																			, ifnull(email_id, '') as email_id
 																			, ifnull(deleted, 0) as deleted
 														from      app_users
 														where     lower(username) = lower(?username)
@@ -80,19 +77,16 @@ namespace Vghoghari.org.AppCode.DataLayer {
 
 			GlobalDL dl = new GlobalDL();
 			dl.AddParameter("username", username);
-			dl.AddParameter("password", hashedPassword);
+			dl.AddParameter("hashedPassword", hashedPassword);
 
 			using (MySqlDataReader dr = dl.ExecuteSqlReturnReader(Utility.ConnectionString, sql)) {
 				if (dr.Read()) {
 					return new User() {
 						Id = dr.GetInt32("id"),
-						FullName = dr.GetString("fullname"),
 						Username = dr.GetString("username"),
 						DeviceId = dr.GetString("device_id"),
 						AuthKey = dr.GetString("auth_key"),
 						UserType = (enUserType) dr.GetInt32("user_type"),
-						MobileNumber = dr.GetString("mobile_number"),
-						EmailId = dr.GetString("email_id"),
 						Deleted = dr.GetBoolean("deleted")
 					};
 				}
