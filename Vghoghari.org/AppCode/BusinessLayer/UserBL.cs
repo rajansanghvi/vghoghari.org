@@ -144,5 +144,10 @@ namespace Vghoghari.org.AppCode.BusinessLayer {
 
 			return new KeyValuePair<enLoginResponse, User>(enLoginResponse.Ok, user);
 		}
+
+		public static AuthenticatedUser AuthenticateUser(string deviceId, string authKey) {
+			AuthenticatedUser authenticatedUser = UserDL.FetchAuthenticatedUser(deviceId, authKey);
+			return authenticatedUser;
+		}
 	}
 }

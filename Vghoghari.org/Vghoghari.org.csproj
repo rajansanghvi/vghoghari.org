@@ -151,6 +151,7 @@
     <Compile Include="AppCode\Models\Enum.cs" />
     <Compile Include="AppCode\Models\Struts.cs" />
     <Compile Include="AppCode\Models\User.cs" />
+    <Compile Include="AppCode\Attributes\ApiAuthorizeAttribute.cs" />
     <Compile Include="AppCode\Utilities\DateUtility.cs" />
     <Compile Include="AppCode\Utilities\UserSessionUtility.cs" />
     <Compile Include="AppCode\Utilities\Utility.cs" />
@@ -186,6 +187,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\Base\BaseApiController.cs" />
     <Compile Include="Controllers\ExternalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />

@@ -18,7 +18,7 @@ namespace Vghoghari.org.AppCode.Models {
 		public enUserType UserType { get; set; }
 		public string MobileNumber { get; set; }
 		public string EmailId { get; set; }
-		public string Religion {get; set; }
+		public string Religion { get; set; }
 		public bool Deleted { get; set; }
 
 		public User() {
@@ -64,6 +64,16 @@ namespace Vghoghari.org.AppCode.Models {
 			IssuedDate = DateTime.UtcNow;
 			ExpiryDate = DateTime.UtcNow.AddDays(1); // default expiry is 1 day 
 			Deleted = false;
+		}
+	}
+
+	public class AuthenticatedUser {
+		public User User { get; set; }
+		public Session Session { get; set; }
+
+		public AuthenticatedUser() {
+			User = new User();
+			Session = new Session();
 		}
 	}
 }

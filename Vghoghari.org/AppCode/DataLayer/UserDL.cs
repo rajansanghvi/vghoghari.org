@@ -94,5 +94,49 @@ namespace Vghoghari.org.AppCode.DataLayer {
 
 			return null;
 		}
+
+		internal static AuthenticatedUser FetchAuthenticatedUser(string deviceId, string authkey) {
+			const string sql = @"select    u.id as id
+																		, ifnull(u.fullname, '') as fullname
+																		, ifnull(u.username, '') as username
+																		, ifnull(u.device_id, '') as device_id
+																		, ifnull(u.user_type, 1) as user_type
+																		, ifnull(u.mobile_number, '') as mobile_number
+																		, ifnull(u.email_id, '') as email_id
+																		, ifnull(s.session_id, '') as session_id
+													from      app_users u
+													left join app_sessions s
+													on        u.id = s.user_id
+													where     u.device_id = ?deviceId
+													and       u.auth_key = ?authKey
+													and       u.deleted = 0
+													and       ifnull(s.expiry_date, now()) >= now()
+													and       s.deleted = 0;";
+
+			GlobalDL dl = new GlobalDL();
+			dl.AddParameter("deviceId", deviceId);
+			dl.AddParameter("authKey", authkey);
+
+			using (MySqlDataReader dr =  dl.ExecuteSqlReturnReader(Utility.ConnectionString, sql)) {
+				if(dr.Read()) {
+					return new AuthenticatedUser() {
+						User = new User() {
+							Id = dr.GetInt32("id"),
+							FullName = dr.GetString("fullname"),
+							Username = dr.GetString("username"),
+							DeviceId = dr.GetString("device_id"),
+							UserType = (enUserType) dr.GetInt32("user_type"),
+							MobileNumber = dr.GetString("mobile_number"),
+							EmailId = dr.GetString("email_id")
+						},
+						Session = new Session() {
+							SessionId = dr.GetString("session_id")
+						}
+					};
+				}
+			}
+
+			return new AuthenticatedUser();
+		}
 	}
 }
