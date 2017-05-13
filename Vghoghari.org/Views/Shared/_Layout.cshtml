@@ -20,6 +20,9 @@
   @Styles.Render("~/Theme/plugins/mediaelement/mediaelementplayer.css")
   @Styles.Render("~/Theme/css/style.css")
   @Styles.Render("~/Theme/plugins/prettyphoto/css/prettyPhoto.css")
+
+  @RenderSection("css", required: false)
+
   <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="@Url.Content("~/Theme/css/ie8.css")" media="screen" /><![endif]-->
   <!-- Color Style -->
   @Styles.Render("~/Theme/colors/color1.css")
@@ -34,6 +37,7 @@
     <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
   <![endif]-->
   <div class="body">
+    <div class="se-pre-con"></div>
     <!-- Start Site Header -->
     <header class="site-header">
       <div class="topbar">
@@ -45,8 +49,13 @@
             <div class="col-md-8 col-sm-6 col-xs-4">
               <ul class="top-navigation hidden-sm hidden-xs">
                 <li>@Html.ActionLink("Contribute Now", "Donate", "Home")</a></li>
-                <li>@Html.ActionLink("Register", "Register", "User")</li>
-                <li>@Html.ActionLink("Login", "Login", "User")</li>
+                @if (HttpContext.Current.User.Identity.IsAuthenticated) {
+                  <li>@Html.ActionLink("Logout", "Logout", "User")</li>
+                }
+                else {
+                  <li>@Html.ActionLink("Register", "Register", "User")</li>
+                  <li>@Html.ActionLink("Login", "Login", "User")</li>
+                }
               </ul>
               <a href="#" class="visible-sm visible-xs menu-toggle"><i class="fa fa-bars"></i></a>
             </div>
@@ -77,7 +86,7 @@
           <!-- Start Footer Widgets -->
           <div class="col-md-4 col-sm-4 widget footer-widget">
             <h4 class="footer-widget-title">About Us</h4>
-            <img src="@Url.Content("Theme/images/logo.png")" alt="Shree Ghoghari Visha Shrimali Jain Mahila Federation">
+            <img src="@Url.Content("~/Theme/images/logo.png")" alt="Shree Ghoghari Visha Shrimali Jain Mahila Federation">
             <div class="spacer-20"></div>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis egestas rhoncus. Donec facilisis consectetur adipiscing elit. Nulla convallis egestas rhoncus</p>
           </div>
@@ -126,48 +135,64 @@
         </div>
       </div>
     </footer>
-    <!-- End Footer --> 
-    <a id="back-to-top"><i class="fa fa-angle-double-up"></i></a> 
+    <!-- End Footer -->
+    <a id="back-to-top"><i class="fa fa-angle-double-up"></i></a>
   </div>
-  @Scripts.Render("~/Theme/js/jquery-2.0.0.min.js") <!-- Jquery Library Call --> 
-  @Scripts.Render("~/Theme/plugins/prettyphoto/js/prettyphoto.js") <!-- PrettyPhoto Plugin --> 
-  @Scripts.Render("~/Theme/js/helper-plugins.js") <!-- Plugins --> 
-  @Scripts.Render("~/Theme/js/bootstrap.js") <!-- UI --> 
-  @Scripts.Render("~/Theme/js/waypoints.js") <!-- Waypoints --> 
-  @Scripts.Render("~/Theme/plugins/mediaelement/mediaelement-and-player.min.js") <!-- MediaElements --> 
-  @Scripts.Render("~/Theme/js/init.js") <!-- All Scripts --> 
-  @Scripts.Render("~/Theme/plugins/flexslider/js/jquery.flexslider.js") <!-- FlexSlider --> 
+  @Scripts.Render("~/Theme/js/jquery-2.0.0.min.js") <!-- Jquery Library Call -->
+  @Scripts.Render("~/Theme/plugins/prettyphoto/js/prettyphoto.js") <!-- PrettyPhoto Plugin -->
+  @Scripts.Render("~/Theme/js/helper-plugins.js") <!-- Plugins -->
+  @Scripts.Render("~/Theme/js/bootstrap.js") <!-- UI -->
+  @Scripts.Render("~/Theme/js/waypoints.js") <!-- Waypoints -->
+  @Scripts.Render("~/Theme/plugins/mediaelement/mediaelement-and-player.min.js") <!-- MediaElements -->
+  @Scripts.Render("~/Theme/js/init.js") <!-- All Scripts -->
+  @Scripts.Render("~/Theme/plugins/flexslider/js/jquery.flexslider.js") <!-- FlexSlider -->
   @Scripts.Render("~/Theme/plugins/countdown/js/jquery.countdown.min.js") <!-- Jquery Timer -->
+
+  <script>
+    $(window).load(function () {
+      // Animate loader off screen
+      $(".se-pre-con").fadeOut("slow");;
+    });
+
+    $('.se-pre-con').bind('ajaxStart', function () {
+      $(this).fadeIn("fast");
+    }).bind('ajaxStop', function () {
+      $(this).fadeOut("slow");
+    });
+  </script>
+
+  @RenderSection("scripts", false)
+
 </body>
 @*<body>
-  <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-      </div>
-      <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-          <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-          <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
-        </ul>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+            <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="container body-content">
-    @RenderBody()
-    <hr />
-    <footer>
-      <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-    </footer>
-  </div>
+    <div class="container body-content">
+      @RenderBody()
+      <hr />
+      <footer>
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+      </footer>
+    </div>
 
-  @Scripts.Render("~/bundles/jquery")
-  @Scripts.Render("~/bundles/bootstrap")
-  @RenderSection("scripts", required: false)
-</body>*@
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+  </body>*@
 </html>

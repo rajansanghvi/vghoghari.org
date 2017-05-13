@@ -43,11 +43,11 @@ namespace Vghoghari.org.AppCode.DataLayer {
 			return new KeyValuePair<HashSet<string>, HashSet<string>>(deviceIds, authKeys);
 		}
 
-		internal static int AddUserDetails(string fullName, string username, string hashedPassword, string deviceId, string authKey, enUserType userType, string mobileNumber, string emailId, string religion) {
+		internal static int AddUserDetails(string fullName, string username, string hashedPassword, string deviceId, string authKey, enUserType userType, string mobileNumber, string emailId) {
 			const string sql = @"insert into app_users
-														(fullname, username, hashed_password, device_id, auth_key, user_type, mobile_number, email_id, religion, deleted, created_by, created_date, modified_by, modified_date)
+														(fullname, username, hashed_password, device_id, auth_key, user_type, mobile_number, email_id,  deleted, created_by, created_date, modified_by, modified_date)
 														values
-														(?fullName, ?username, ?hashedPassword, ?deviceId, ?authKey, ?userType, ?mobileNumber, ?emailId, ?religion, 0, ?username, now(), null, null);
+														(?fullName, ?username, ?hashedPassword, ?deviceId, ?authKey, ?userType, ?mobileNumber, ?emailId, 0, ?username, now(), null, null);
 														select LAST_INSERT_ID();";
 
 			GlobalDL dl = new GlobalDL();
@@ -59,7 +59,6 @@ namespace Vghoghari.org.AppCode.DataLayer {
 			dl.AddParameter("userType", userType);
 			dl.AddParameter("mobileNumber", mobileNumber);
 			dl.AddParameter("emailId", emailId);
-			dl.AddParameter("religion", religion);
 
 			return dl.ExecuteSqlReturnScalar<int>(Utility.ConnectionString, sql);
 		}
@@ -95,7 +94,7 @@ namespace Vghoghari.org.AppCode.DataLayer {
 			return null;
 		}
 
-		internal static AuthenticatedUser FetchAuthenticatedUser(string deviceId, string authkey) {
+		internal static User FetchAuthenticatedUser(string deviceId, string authkey, string sessionId) {
 			const string sql = @"select    u.id as id
 																		, ifnull(u.fullname, '') as fullname
 																		, ifnull(u.username, '') as username
@@ -111,32 +110,30 @@ namespace Vghoghari.org.AppCode.DataLayer {
 													and       u.auth_key = ?authKey
 													and       u.deleted = 0
 													and       ifnull(s.expiry_date, now()) >= now()
-													and       s.deleted = 0;";
+													and       s.deleted = 0
+													and				s.session_id = ?sessionId;";
 
 			GlobalDL dl = new GlobalDL();
 			dl.AddParameter("deviceId", deviceId);
 			dl.AddParameter("authKey", authkey);
+			dl.AddParameter("sessionId", sessionId);
 
 			using (MySqlDataReader dr =  dl.ExecuteSqlReturnReader(Utility.ConnectionString, sql)) {
 				if(dr.Read()) {
-					return new AuthenticatedUser() {
-						User = new User() {
-							Id = dr.GetInt32("id"),
-							FullName = dr.GetString("fullname"),
-							Username = dr.GetString("username"),
-							DeviceId = dr.GetString("device_id"),
-							UserType = (enUserType) dr.GetInt32("user_type"),
-							MobileNumber = dr.GetString("mobile_number"),
-							EmailId = dr.GetString("email_id")
-						},
-						Session = new Session() {
-							SessionId = dr.GetString("session_id")
-						}
+					return new User() {
+						Id = dr.GetInt32("id"),
+						FullName = dr.GetString("fullname"),
+						Username = dr.GetString("username"),
+						DeviceId = dr.GetString("device_id"),
+						UserType = (enUserType) dr.GetInt32("user_type"),
+						MobileNumber = dr.GetString("mobile_number"),
+						EmailId = dr.GetString("email_id"),
+						SessionId = dr.GetString("session_id")
 					};
 				}
 			}
 
-			return new AuthenticatedUser();
+			return new User();
 		}
 	}
 }

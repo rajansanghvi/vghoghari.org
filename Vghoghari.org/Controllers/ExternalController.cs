@@ -20,9 +20,8 @@ namespace Vghoghari.org.Controllers {
 			string confirmedPassword = data.ConfirmedPassword;
 			string mobileNumber = data.MobileNumber;
 			string emailId = data.EmailId;
-			string religion = data.Religion;
-
-			enRegistrationResponse response = UserBL.Register(fullName.Trim(), username.Trim(), password.Trim(), confirmedPassword.Trim(), mobileNumber.Trim(), emailId.Trim(), religion.Trim());
+			
+			enRegistrationResponse response = UserBL.Register(fullName.Trim(), username.Trim(), password.Trim(), confirmedPassword.Trim(), mobileNumber.Trim(), emailId.Trim());
 
 			switch (response) {
 				case enRegistrationResponse.DataValidationError:
@@ -51,8 +50,13 @@ namespace Vghoghari.org.Controllers {
 					return Content(HttpStatusCode.Unauthorized, "Sorry, the login credential provided is not valid. Please retry using valid username and password. Thank you!");
 				default:
 					UserSessionUtility.ManageSession(response.Value, createPersistentCookie);
-					return Ok(response.Value);
+					return Ok();
 			}
+		}
+
+		[HttpPost]
+		public bool UsernameAvailable(string username) {
+			return UserBL.UsernameAvailable(username.Trim());
 		}
 	}
 }

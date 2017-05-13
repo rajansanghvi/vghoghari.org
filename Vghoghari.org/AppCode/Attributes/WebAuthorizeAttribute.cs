@@ -2,12 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Security.Principal;
 using System.Web;
-using System.Web.Http;
-using System.Web.Http.Controllers;
+using System.Web.Mvc;
+using System.Web.Routing;
 using System.Web.Security;
 using Vghoghari.org.AppCode.BusinessLayer;
 using Vghoghari.org.AppCode.Models;
@@ -15,10 +13,10 @@ using Vghoghari.org.Controllers.Base;
 using static Vghoghari.org.AppCode.Models.Enum;
 
 namespace Vghoghari.org.AppCode.Attributes {
-	public class ApiAuthorizeAttribute: AuthorizeAttribute {
+	public class WebAuthorizeAttribute : AuthorizeAttribute {
 
-		public override void OnAuthorization(HttpActionContext actionContext) {
-			IPrincipal user = actionContext.RequestContext.Principal;
+		public override void OnAuthorization(AuthorizationContext filterContext) {
+			IPrincipal user = filterContext.HttpContext.User;
 			if (user != null && user.Identity.IsAuthenticated && user.Identity is FormsIdentity) {
 				FormsIdentity id = (FormsIdentity) user.Identity;
 				FormsAuthenticationTicket ticket = id.Ticket;
@@ -42,19 +40,19 @@ namespace Vghoghari.org.AppCode.Attributes {
 					User authenticatedUser = AuthenticateUser(deviceId, authkey, sessionId, (enUserType) userType);
 
 					if (authenticatedUser != null) {
-						if (actionContext.ControllerContext.Controller.GetType().IsSubclassOf(typeof(BaseApiController))) {
-							((BaseApiController) actionContext.ControllerContext.Controller).AuthenticatedUser = authenticatedUser;
+						if(filterContext.Controller.GetType().IsSubclassOf(typeof(BaseController))) {
+							((BaseController) filterContext.Controller).AuthenticatedUser = authenticatedUser;
 						}
 						return;
 					}
 				}
 			}
 
-			HandleUnauthorizedRequest(actionContext);
+			HandleUnauthorizedRequest(filterContext);
 		}
-		
-		protected override void HandleUnauthorizedRequest(HttpActionContext actionContext) {
-			actionContext.Response = new HttpResponseMessage(HttpStatusCode.Unauthorized);
+
+		protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext) {
+			filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "User", action = "Login" }));
 		}
 
 		private User AuthenticateUser(string deviceId, string authKey, string sessionId, enUserType userType) {

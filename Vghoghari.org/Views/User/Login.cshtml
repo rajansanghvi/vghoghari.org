@@ -1,5 +1,5 @@
 ﻿@{
-  ViewBag.Title = "New User Registration";
+  ViewBag.Title = "User Login";
 }
 
 <!-- Start Nav Backed Header -->
@@ -10,7 +10,7 @@
         <ol class="breadcrumb">
           <li>@Html.ActionLink("Home", "Index", "Home")</li>
           <li class="active">User</li>
-          <li class="active">Register</li>
+          <li class="active">Login</li>
         </ol>
       </div>
     </div>
@@ -22,7 +22,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h1>New User Registration</h1>
+        <h1>User Login</h1>
       </div>
     </div>
   </div>
@@ -35,47 +35,36 @@
       <div class="row">
         <div class="col-md-9">
           <header class="single-post-header clearfix">
-            <h2 class="post-title">Register Now!</h2>
+            <h2 class="post-title">Login Now!</h2>
           </header>
           <div class="post-content">
             <div class="row">
-              <form id="userRegistrationForm" name="userRegistrationForm" class="contact-form">
+              <form id="loginForm" name="loginForm" class="contact-form">
                 <div class="col-md-12 margin-15 text-warning">
-                  <p class="text-center">Already registered? @Html.ActionLink("Click here", "Login", "User", null, new { @class = "no-underline"}) to go to the login page.</p>
-                </div> 
+                  <p class="text-center">Not registered yet? @Html.ActionLink("Click here", "Register", "User", null, new { @class = "no-underline" }) to go to the new user resgistration page.</p>
+                </div>
                 <div class="col-md-12 margin-15 text-info">
-                  <p class="text-center">All fields marked with * are compulsory. Please fill in the required details and register yourselves.</p>
+                  <p class="text-center">All fields marked with * are compulsory. Please fill in the required details and login now!</p>
                 </div>
                 <div class="col-md-6 margin-15">
                   <div class="form-group">
                     <input type="text" id="username" name="username" class="form-control input-lg" placeholder="Username*">
                     <div class="custom-error" id="err-username"></div>
                   </div>
+                </div>
+                <div class="col-md-6">
                   <div class="form-group">
                     <input type="password" id="password" name="password" class="form-control input-lg" placeholder="Password*">
                     <div class="custom-error" id="err-password"></div>
                   </div>
-                  <div class="form-group">
-                    <input type="password" id="confirm-password" name="confirm-password" class="form-control input-lg" placeholder="Confirm Password*">
-                    <div class="custom-error" id="err-confirm-password"></div>
+                  <div class="checkbox">
+                    <label class="control-label" for="persistent">
+                      <input type="checkbox" id="persistent" name="persistent" class="form-horizontal"> Remember Me
+                    </label>
                   </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group has-feedback">
-                    <input type="text" id="fullname" name="fullname" class="form-control input-lg" placeholder="Fullname*">
-                    <div class="custom-error" id="err-fullname"></div>
-                  </div>
-                  <div class="form-group has-feedback">
-                    <input type="number" id="mobile-number" name="mobile-number" class="form-control input-lg" placeholder="Mobile Number*">
-                    <div class="custom-error" id="err-mobile-number"></div>
-                  </div>
-                  <div class="form-group has-feedback">
-                    <input type="email" id="email-id" name="email-id" class="form-control input-lg" placeholder="Email Id">
-                  </div>
-                  <div class="custom-error" id="err-email-id"></div>
                 </div>
                 <div class="col-md-12">
-                  <input id="btn-regiter" name="submit" type="submit" class="btn btn-primary btn-lg pull-right stretch-full-width" value="Register now">
+                  <input id="btn-login" name="submit" type="submit" class="btn btn-primary btn-lg pull-right stretch-full-width" value="Login now">
                   <input id="btn-reset" name="reset" type="reset" class="btn btn-default btn-lg stretch-full-width" value="Reset">
                 </div>
               </form>
@@ -117,5 +106,6 @@
 @section scripts {
   @Scripts.Render("~/Scripts/custom/constants.js");
   @Scripts.Render("~/Scripts/custom/root.js");
-  @Scripts.Render("~/Scripts/custom/register.js");
+  @Scripts.Render("~/Scripts/custom/login.js");
 }
+

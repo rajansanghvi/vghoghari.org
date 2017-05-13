@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+using System.Web;
+using System.Web.Mvc;
 using Vghoghari.org.AppCode.Models;
 
 namespace Vghoghari.org.Controllers.Base {
-	public class BaseApiController: ApiController {
+	public class BaseController : Controller {
 		internal User AuthenticatedUser { get; set; }
 
-		public BaseApiController() {
+		public BaseController() {
 			this.AuthenticatedUser = new User();
 		}
 	}

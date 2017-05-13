@@ -13,6 +13,10 @@ namespace Vghoghari.org.AppCode.BusinessLayer {
 			SessionDL.DeleteSessions(userId, "system");
 		}
 
+		public static void DeleteSession(string sessionId) {
+			SessionDL.DeleteSession(sessionId);
+		}
+
 		public static void CreateSession(Session session) {
 			SessionDL.AddSession(session, "system");
 		}

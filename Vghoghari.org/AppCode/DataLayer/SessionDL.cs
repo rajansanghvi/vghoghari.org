@@ -24,6 +24,21 @@ namespace Vghoghari.org.AppCode.DataLayer {
 			return dl.ExecuteSqlNonQuery(Utility.ConnectionString, sql);
 		}
 
+		internal static int DeleteSession(string sessionId) {
+			const string sql = @"update    app_sessions s
+														left join app_users u
+														on        s.user_id = u.id
+														set       s.deleted = 1
+															        , s.modified_by = u.id
+																			, s.modified_date = now()
+														where     s.session_id = ?sessionId;";
+
+			GlobalDL dl = new GlobalDL();
+			dl.AddParameter("sessionId", sessionId);
+
+			return dl.ExecuteSqlNonQuery(Utility.ConnectionString, sql);
+		}
+
 		internal static int AddSession(Session session, string createdBy) {
 			const string sql = @"insert into app_sessions
 														(user_id, session_id, expiry_date, user_agent, deleted, created_by, created_date, modified_by, modified_date)

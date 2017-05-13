@@ -8,6 +8,7 @@ using System.Web.Security;
 using System.Xml;
 using Vghoghari.org.AppCode.BusinessLayer;
 using Vghoghari.org.AppCode.Models;
+using static Vghoghari.org.AppCode.Models.Enum;
 
 namespace Vghoghari.org.AppCode.Utilities {
 	public class UserSessionUtility {
@@ -38,6 +39,7 @@ namespace Vghoghari.org.AppCode.Utilities {
 
 		public static void CreateUserSession(string userName, string userData, bool createPersistentCookie, string strCookiePath) {
 			SetAuthCookie(userName, userData, createPersistentCookie, strCookiePath);
+			FormsAuthentication.RedirectFromLoginPage(userName, createPersistentCookie);
 			// HttpContext.Current.Response.Redirect(FormsAuthentication.GetRedirectUrl(userName, createPersistentCookie));
 		}
 
@@ -89,7 +91,7 @@ namespace Vghoghari.org.AppCode.Utilities {
 
 			return timeout;
 		}
-		
+
 		//public static void AttachRolesToUser() {
 		//	IPrincipal user = HttpContext.Current.User;
 

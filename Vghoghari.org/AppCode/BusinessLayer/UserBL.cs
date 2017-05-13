@@ -17,7 +17,7 @@ namespace Vghoghari.org.AppCode.BusinessLayer {
 		private const string REGEX_MOBILE_NUMBER = @"^[789]\d{9}$";
 		private const string REGEX_EMAIL_ID = @"^([\w\.\-_]+)?\w+@[\w-_]+(\.\w+){1,}$";
 
-		private static enRegistrationResponse ValidateRegistrationData(string fullName, string username, string password, string confirmedPassword, string mobileNumber, string emailId, string religion) {
+		private static enRegistrationResponse ValidateRegistrationData(string fullName, string username, string password, string confirmedPassword, string mobileNumber, string emailId) {
 
 			// Fullname can consists only alphabets. this regex is not case sensitive
 			if (string.IsNullOrWhiteSpace(fullName)
@@ -84,8 +84,8 @@ namespace Vghoghari.org.AppCode.BusinessLayer {
 			return new KeyValuePair<string, string>(deviceId, authKey);
 		}
 
-		public static enRegistrationResponse Register(string fullName, string username, string password, string confirmedPassword, string mobileNumber, string emailId, string religion) {
-			enRegistrationResponse response = ValidateRegistrationData(fullName, username, password, confirmedPassword, mobileNumber, emailId, religion);
+		public static enRegistrationResponse Register(string fullName, string username, string password, string confirmedPassword, string mobileNumber, string emailId) {
+			enRegistrationResponse response = ValidateRegistrationData(fullName, username, password, confirmedPassword, mobileNumber, emailId);
 
 			if (response != enRegistrationResponse.Ok) {
 				return response;
@@ -95,12 +95,8 @@ namespace Vghoghari.org.AppCode.BusinessLayer {
 			enUserType userType = enUserType.User; 
 			string hashedPassword = Utility.GetMd5Hash(password);
 			KeyValuePair<string, string> appKeys = GenerateUniqueAppKeys();
-
-			if(!string.IsNullOrWhiteSpace(religion)) {
-				religion = Utility.RemoveHtml(religion);
-			}
-
-			int userId = UserDL.AddUserDetails(fullName, username, hashedPassword, appKeys.Key, appKeys.Value, userType, mobileNumber, emailId, religion);
+			
+			int userId = UserDL.AddUserDetails(fullName, username, hashedPassword, appKeys.Key, appKeys.Value, userType, mobileNumber, emailId);
 
 			if (userId > 0) {
 				return enRegistrationResponse.Ok;
@@ -145,9 +141,17 @@ namespace Vghoghari.org.AppCode.BusinessLayer {
 			return new KeyValuePair<enLoginResponse, User>(enLoginResponse.Ok, user);
 		}
 
-		public static AuthenticatedUser AuthenticateUser(string deviceId, string authKey) {
-			AuthenticatedUser authenticatedUser = UserDL.FetchAuthenticatedUser(deviceId, authKey);
-			return authenticatedUser;
+		public static User AuthenticateUser(string deviceId, string authKey, string sessionId) {
+			return UserDL.FetchAuthenticatedUser(deviceId, authKey, sessionId);
+			
+		}
+
+		public static bool UsernameAvailable(string username) {
+			return !UserDL.UsernameExists(username);
+		}
+
+		public static void Logout(string sessionId) {
+			SessionBL.DeleteSession(sessionId);
 		}
 	}
 }

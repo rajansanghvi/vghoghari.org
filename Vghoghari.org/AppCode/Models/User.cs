@@ -15,10 +15,10 @@ namespace Vghoghari.org.AppCode.Models {
 		public string Username { get; set; }
 		public string DeviceId { get; set; }
 		public string AuthKey { get; set; }
+		public string SessionId { get; set; }
 		public enUserType UserType { get; set; }
 		public string MobileNumber { get; set; }
 		public string EmailId { get; set; }
-		public string Religion { get; set; }
 		public bool Deleted { get; set; }
 
 		public User() {
@@ -27,10 +27,10 @@ namespace Vghoghari.org.AppCode.Models {
 			Username = string.Empty;
 			DeviceId = string.Empty;
 			AuthKey = string.Empty;
+			SessionId = string.Empty;
 			UserType = enUserType.User;
 			MobileNumber = string.Empty;
 			EmailId = string.Empty;
-			Religion = string.Empty;
 			Deleted = false;
 		}
 	}
