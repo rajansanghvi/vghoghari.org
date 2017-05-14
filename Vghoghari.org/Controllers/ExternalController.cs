@@ -58,5 +58,10 @@ namespace Vghoghari.org.Controllers {
 		public bool UsernameAvailable(string username) {
 			return UserBL.UsernameAvailable(username.Trim());
 		}
+
+		[HttpGet]
+		public List<KeyValuePair<string, string>> GetCities(int countryCode) {
+			return AppBL.GetCities(countryCode);
+		}
 	}
 }

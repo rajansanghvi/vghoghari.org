@@ -44,3 +44,15 @@
 .no-underline {
 	text-decoration: none;
 }
+
+.red {
+	color: #ff0000;
+}
+
+.thin-label {
+	font-weight: 100;
+}
+
+label.required {
+	font-style: italic !important;
+}

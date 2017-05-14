@@ -144,8 +144,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppCode\Attributes\WebAuthorizeAttribute.cs" />
+    <Compile Include="AppCode\BusinessLayer\AppBL.cs" />
     <Compile Include="AppCode\BusinessLayer\SessionBL.cs" />
     <Compile Include="AppCode\BusinessLayer\UserBL.cs" />
+    <Compile Include="AppCode\DataLayer\AppDL.cs" />
     <Compile Include="AppCode\DataLayer\GlobalDL.cs" />
     <Compile Include="AppCode\DataLayer\SessionDL.cs" />
     <Compile Include="AppCode\DataLayer\UserDL.cs" />
@@ -193,14 +195,21 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ExternalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MatrimonialApiController.cs" />
+    <Compile Include="Controllers\MatrimonialController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\MatrimonialDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AppCode\Database\app_cities2017-05-14 12-46-53.sql" />
+    <Content Include="AppCode\Database\app_countries2017-05-14 12-43-00.sql" />
+    <Content Include="AppCode\Database\app_states2017-05-14 12-45-07.sql" />
+    <Content Include="AppCode\Database\data.sql" />
     <Content Include="AppCode\Database\schema_update.sql" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -245,6 +254,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\custom\constants.js" />
     <Content Include="Scripts\custom\login.js" />
+    <Content Include="Scripts\custom\addbiodata.js" />
     <Content Include="Scripts\custom\register.js" />
     <Content Include="Scripts\custom\root.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -252,6 +262,7 @@
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
@@ -312,6 +323,10 @@
     <Content Include="Theme\js\modernizr.js" />
     <Content Include="Theme\js\waypoints.js" />
     <Content Include="Theme\mail\contact.php" />
+    <Content Include="Theme\plugins\bootstrap-datetimepicker-master\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="Theme\plugins\bootstrap-datetimepicker-master\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="Theme\plugins\bootstrap-select-1.10.0\css\bootstrap-select.min.css" />
+    <Content Include="Theme\plugins\bootstrap-select-1.10.0\js\bootstrap-select.min.js" />
     <Content Include="Theme\plugins\countdown\js\jquery.countdown.min.js" />
     <Content Include="Theme\plugins\flexslider\css\flexslider.css" />
     <Content Include="Theme\plugins\flexslider\js\jquery.flexslider.js" />
@@ -550,10 +565,10 @@
     <Content Include="Views\User\Register.cshtml" />
     <Content Include="Views\Error\Internal.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Matrimonial\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Theme\audio\" />
   </ItemGroup>
   <ItemGroup>

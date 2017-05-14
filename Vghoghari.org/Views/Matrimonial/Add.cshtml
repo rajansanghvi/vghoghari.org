@@ -1,0 +1,633 @@
+﻿@{
+  ViewBag.Title = "Add Matrimonial Biodata";
+}
+
+@section css {
+  <link href="~/Theme/plugins/bootstrap-select-1.10.0/css/bootstrap-select.min.css" rel="stylesheet" />
+  <link href="~/Theme/plugins/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+}
+
+<!-- Start Nav Backed Header -->
+<div class="nav-backed-header parallax">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <ol class="breadcrumb">
+          <li>@Html.ActionLink("Home", "Index", "Home")</li>
+          <li class="active">Matrimonial</li>
+          <li class="active">Add</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Nav Backed Header -->
+<!-- Start Page Header -->
+<div class="page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Add Matrimonial Biodata</h1>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Page Header -->
+<!-- Start Content -->
+<div class="main" role="main">
+  <div id="content" class="content full">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <header class="single-post-header clearfix">
+            <h2 class="post-title">Create A New Biodata Now!</h2>
+          </header>
+          <div class="post-content">
+            <div class="row">
+              <form id="newBiodataForm" name="newBiodataForm" class="contact-form">
+                <div class="col-md-12 margin-15 text-warning">
+                  <p class="text-center">Want to manage your existing biodatas? @Html.ActionLink("Click here", "Manage", "Matrimonial", null, new { @class = "no-underline" }) to view the list.</p>
+                </div>
+                <div class="col-md-12 margin-15 text-info">
+                  <p class="text-center">All fields marked with * are compulsory. Please fill in the required details to submit a biodata now.</p>
+                </div>
+                <div class="col-md-12 margin-10">
+                  <h4 class="post-title">Basic Info</h4>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group has-feedback">
+                    <label class="control-label thin-label required" for="gender">A Prospective: <span class="red">*</span></label>
+                    <select id="gender" name="gender" class="form-control selectpicker" data-show-tick="true" data-tick-icon="fa fa-check" data-show-menu-arrow="true" data-select-on-tab="true">
+                      <option value="">Select One</option>
+                      <option value="Male">Groom</option>
+                      <option value="Female">Bride</option>
+                    </select>
+                    <div class="custom-error" id="err-gender"></div>
+                  </div>
+                </div>
+
+                <div class="col-md-8">
+                  <div class="form-group has-feedback">
+                    <label for="fullname" class="control-label thin-label required">Full Name:<span class="red">*</span></label>
+                    <input type="text" id="fullname" name="fullname" class="form-control input-sm" />
+                    <div id="err-fullname" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-4">
+                  <div class="form-group has-feedback">
+                    <label for="dob" class="control-label thin-label required">Date of Birth (yyyy-mm-dd):<span class="red">*</span></label>
+                    <input type="text" id="dob" name="dob" class="form-control input-sm" />
+                    <div id="err-dob" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group has-feedback">
+                    <label for="birthtime" class="control-label thin-label">Birth Time (hh:mm):</label>
+                    <input type="text" id="birthtime" name="birthtime" class="form-control input-sm" />
+                    <div id="err-birthtime" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group has-feedback">
+                    <label for="marital-status" class="control-label thin-label required">Marital Status:<span class="red">*</span></label>
+                    <select id="marital-status" name="marital-status" class="form-control selectpicker" data-show-tick="true" data-tick-icon="fa fa-check" data-show-menu-arrow="true" data-select-on-tab="true">
+                      <option value="">Select One</option>
+                      <option value="Never Married">Never Married</option>
+                      <option value="Engagement Broken">Engagement Broken</option>
+                      <option value="Seperated">Seperated</option>
+                      <option value="Divorced">Divorced</option>
+                      <option value="Widowed / Widower">Widowed / Widower</option>
+                    </select>
+                    <div id="err-marital-status" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="clearfix"></div>
+                                             
+                <div class="col-md-4">
+                  <div class="form-group has-feedback"> 
+                    <label for="native" class="control-label thin-label required">Native:<span class="red">*</span></label>
+                    <input type="text" id="native" name="native" class="form-control input-sm" />
+                    <div id="err-native" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group has-feedback">
+                    <label for="birth-place" class="control-label thin-label">Birth Place:</label>
+                    <input type="text" id="birth-place" name="birth-place" class="form-control input-sm" />
+                    <div id="err-birth-place" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group has-feedback">
+                    <label for="caste" class="control-label thin-label required">Caste:<span class="red">*</span></label>
+                    <select id="caste" name="caste" class="form-control selectpicker" data-show-tick="true" data-tick-icon="fa fa-check" data-show-menu-arrow="true" data-select-on-tab="true">
+                      <option value="">Select One</option>
+                      <option value="Digamber">Digamber</option>
+                      <option value="Digamber - Bisapantha">Digamber - Bisapantha</option>
+                      <option value="Digamber - Kanjipantha">Digamber - Kanjipantha</option>
+                      <option value="Digamber - Taranapantha">Digamber - Taranapantha</option>
+                      <option value="Digamber - Terapantha">Digamber - Terapantha</option>
+                      <option value="Digamber - Totapantha">Digamber - Totapantha</option>
+                      <option value="Jain">Jain</option>
+                      <option value="Shwetamber">Shwetamber</option>
+                      <option value="Shwetamber - Kharatara Gaccha">Shwetamber - Kharatara Gaccha</option>
+                      <option value="Shwetamber - Murtipujak">Shwetamber - Murtipujak</option>
+                      <option value="Shwetamber - Sthankavasi">Shwetamber - Sthankavasi</option>
+                      <option value="Shwetamber - TapaGaccha">Shwetamber - Tapa Gaccha</option>
+                      <option value="Vania">Vania</option>
+                      <option value="Other">Other</option>
+                    </select>
+                    <div id="err-caste" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-12 margin-10">
+                  <h4 class="post-title">Personal Info</h4>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group has-feedback">
+                        <label for="height-ft" class="control-label thin-label required">Height (Ft.):<span class="red">*</span></label>
+                        <select id="height-ft" name="height-ft" class="form-control selectpicker" data-show-tick="true" data-tick-icon="fa fa-check" data-show-menu-arrow="true" data-select-on-tab="true">
+                          <option value="">Select ft</option>
+                          <option value="3">3 ft</option>
+                          <option value="4">4 ft</option>
+                          <option value="5">5 ft</option>
+                          <option value="6">6 ft</option>
+                          <option value="7">7 ft</option>
+                        </select>
+                        <div id="err-height-ft" class="custom-error"></div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group has-feedback">
+                        <label for="height-in" class="control-label thin-label required">Height (In.):<span class="red">*</span></label>
+                        <select id="height-in" name="height-in" class="form-control selectpicker" data-show-tick="true" data-tick-icon="fa fa-check" data-show-menu-arrow="true" data-select-on-tab="true">
+                          <option value=""> Select in.</option>
+                          <option value="0"> 0 inch</option>
+                          <option value="1"> 1 inch</option>
+                          <option value="2"> 2 inch</option>
+                          <option value="3"> 3 inch</option>
+                          <option value="4"> 4 inch</option>
+                          <option value="5"> 5 inch</option>
+                          <option value="6"> 6 inch</option>
+                          <option value="7"> 7 inch</option>
+                          <option value="8"> 8 inch</option>
+                          <option value="9"> 9 inch</option>
+                          <option value="10"> 10 inch</option>
+                          <option value="11"> 11 inch</option>
+                        </select>
+                        <div id="err-height-in" class="custom-error"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group has-feedback">
+                    <label for="weight" class="control-label thin-label">Weight (kgs):</label>
+                    <input type="number" id="weight" name="weight" class="form-control input-sm" />
+                    <div id="err-weight" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group has-feedback">
+                    <label for="blood-group" class="control-label thin-label">Blood Group:</label>
+                    <select id="blood-group" name="blood-group" class="form-control selectpicker" data-show-tick="true" data-tick-icon="fa fa-check" data-show-menu-arrow="true" data-select-on-tab="true">
+                      <option value="">Select One</option>
+                      <option value="A+">A+</option>
+                      <option value="A-">A-</option>
+                      <option value="AB+">AB+</option>
+                      <option value="AB-">AB-</option>
+                      <option value="B+">B+</option>
+                      <option value="B-">B-</option>
+                      <option value="O+">O+</option>
+                      <option value="O-">O-</option>
+                    </select>
+                    <div id="err-blood-group" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-4">
+                  <div class="form-group has-feedback">
+                    <label for="manglik" class="control-label thin-label">Manglik:</label>
+                    <select id="manglik" name="manglik" class="form-control selectpicker" data-show-tick="true" data-tick-icon="fa fa-check" data-show-menu-arrow="true" data-select-on-tab="true">
+                      <option value="">Select One</option>
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+                    <div id="err-manglik" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group has-feedback">
+                    <label for="horoscope-match" class="control-label thin-label">Horoscope Match Required:</label>
+                    <select id="horoscope-match" name="horoscope-match" class="form-control selectpicker" data-show-tick="true" data-tick-icon="fa fa-check" data-show-menu-arrow="true" data-select-on-tab="true">
+                      <option value="">Select One</option>
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+                    <div id="err-horoscope-match" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group has-feedback">
+                    <label for="food-habits" class="control-label thin-label">Food Habits:</label>
+                    <select id="food-habits" name="horoscope-match" class="form-control selectpicker" data-show-tick="true" data-tick-icon="fa fa-check" data-show-menu-arrow="true" data-select-on-tab="true">
+                      <option value="">Select One</option>
+                      <option value="Jain">Jain</option>
+                      <option value="Non Jain">Non Jain</option>
+                    </select>
+                    <div id="err-food-habits" class="custom-error"></div>
+                  </div>
+                </div>
+                
+                <div class="clearfix"></div>
+
+                <div class="col-md-12 margin-10">
+                  <h4 class="post-title">Education Info</h4>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group has-feedback">
+                    <label for="education" class="control-label thin-label required">Highest Education:<span class="red">*</span></label>
+                    <select id="education" name="education" class="form-control selectpicker" data-show-tick="true" data-tick-icon="fa fa-check" data-show-menu-arrow="true" data-select-on-tab="true">
+                      <option value="">Select One</option>
+                      <option value="Post Graduation">Post Graduation</option>
+                      <option value="Graduation">Graduation</option>
+                      <option value="HSC">HSC</option>
+                      <option value="SSC">SSC</option>
+                    </select>
+                    <div id="err-education" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group has-feedback">
+                    <label for="degrees" class="control-label thin-label">Degrees:</label>
+                    <select id="degrees" name="degrees" class="form-control selectpicker" data-show-tick="true" data-tick-icon="fa fa-check" data-show-menu-arrow="true" multiple>
+                      <optgroup label="Select">
+                        <option value="">Select Mutiple</option>
+                      </optgroup>
+                      <optgroup label="PG-Professional Courses">
+                        <option value="CA (Chartered Accountant)">CA (Chartered Accountant)</option>
+                        <option value="CFA (Chartered Financial Analyst)">CFA (Chartered Financial Analyst)</option>
+                        <option value="CS (Company Secretary)">CS (Company Secretary)</option>
+                        <option value="ICWA">ICWA</option>
+                        <option value="Integrated PG">Integrated PG</option>
+                        <option value="M.Arch. (Architecture)">M.Arch. (Architecture)</option>
+                        <option value="M.Ed. (Education)"> M.Ed. (Education)</option>
+                        <option value="M.Lib.Sc. (Library Sciences)">M.Lib.Sc. (Library Sciences)</option>
+                        <option value="M.Plan. (Planning)">M.Plan. (Planning)</option>
+                        <option value="Master of Fashion Technology">Master of Fashion Technology</option>
+                        <option value="Master of Health Administration">Master of Health Administration</option>
+                        <option value="Master of Hospital Administration"> Master of Hospital Administration</option>
+                        <option value="MBA/PGDM">MBA/PGDM</option>
+                        <option value="MCA PGDCA part time">MCA PGDCA part time</option>
+                        <option value="MCA/PGDCA">MCA/PGDCA</option>
+                        <option value="ME/M.Tech/MS (Engg/Sciences)">ME/M.Tech/MS (Engg/Sciences)</option>
+                        <option value="MFA (Fine Arts)">MFA (Fine Arts)</option>
+                        <option value="ML/LLM (Law)">ML/LLM (Law)</option>
+                        <option value="MSW (Social Work)">MSW (Social Work)</option>
+                        <option value="PG Diploma">PG Diploma</option>
+                      </optgroup>
+                      <optgroup label="PG-General Courses">
+                        <option value="M.Com. (Commerce)">M.Com. (Commerce)</option>
+                        <option value="M.Sc. (Science)">M.Sc. (Science)</option>
+                        <option value="MA (Arts)">MA (Arts)</option>
+                      </optgroup>
+                      <optgroup label="Graduation-Professional Courses">
+                        <option value="B.Arch (Architecture)">B.Arch (Architecture)</option>
+                        <option value="B.Ed (Education)">B.Ed (Education)</option>
+                        <option value="B.El.Ed (Elementary Education)">B.El.Ed (Elementary Education)</option>
+                        <option value="B.Lib.Sc (Library Sciences)">B.Lib.Sc (Library Sciences)</option>
+                        <option value="B.P.Ed. (Physical Education)">B.P.Ed. (Physical Education)</option>
+                        <option value="B.Plan (Planning)">B.Plan (Planning)</option>
+                        <option value="Bachelor of Fashion Technology">Bachelor of Fashion Technology</option>
+                        <option value="BBA/BBM/BBS">BBA/BBM/BBS</option>
+                        <option value="BCA (Computer Application)">BCA (Computer Application)</option>
+                        <option value="BE B.Tech (Engineering)">BE B.Tech (Engineering)</option>
+                        <option value="BFA (Fine Arts)">BFA (Fine Arts)</option>
+                        <option value="BHM (Hotel Management)">BHM (Hotel Management)</option>
+                        <option value="BL/LLB/BGL (Law)">BL/LLB/BGL (Law)</option>
+                        <option value="BSW (Social Work)">BSW (Social Work)</option>
+                      </optgroup>
+                      <optgroup label="Graduation-General Courses">
+                        <option value="B.A. (Arts)">B.A. (Arts)</option>
+                        <option value="B.Com (Commerce)">B.Com (Commerce)</option>
+                        <option value="B.Sc (Science)">B.Sc (Science)</option>
+                      </optgroup>
+                      <optgroup label="Medicine(General, Dental, Surgeon)">
+                        <option value="B.A.M.S (Bachelor of Ayurvedic Medicine and Surgery)">B.A.M.S (Bachelor of Ayurvedic Medicine and Surgery)</option>
+                        <option value="B.Pharm (Pharmacy)">B.Pharm (Pharmacy)</option>
+                        <option value="B.V.Sc. (Veterinary Science)">B.V.Sc. (Veterinary Science)</option>
+                        <option value="BDS (Dental Surgery)">BDS (Dental Surgery)</option>
+                        <option value="BHMS (Homeopathy)">BHMS (Homeopathy)</option>
+                        <option value="M.Pharm. (Pharmacy)">M.Pharm. (Pharmacy)</option>
+                        <option value="M.V.Sc. (Veterinary Science)">M.V.Sc. (Veterinary Science)</option>
+                        <option value="MBBS">MBBS</option>
+                        <option value="MD/ MS (Medicine)">MD/ MS (Medicine)</option>
+                        <option value="MDS (Master of Dental Surgery)">MDS (Master of Dental Surgery)</option>
+                        <option value="BPT (Physiotherapy)">BPT (Physiotherapy)</option>
+                        <option value="MPT (Physiotherapy)">MPT (Physiotherapy)</option>
+                      </optgroup>
+                      <optgroup label="Doctorate(Phd)">
+                        <option value="M.Phil. (Philosophy)">M.Phil. (Philosophy)</option>
+                        <option value="Ph.D. (Doctorate)">Ph.D. (Doctorate)</option>
+                        <option value="Other Doctorate">Other Doctorate</option>
+                      </optgroup>
+                      <optgroup label="Diploma Courses">
+                        <option value="Arts/ Graphic Designing">Arts/ Graphic Designing</option>
+                        <option value="Engineering">Engineering</option>
+                        <option value="Fashion/ Design">Fashion/ Design</option>
+                        <option value="Languages">Languages</option>
+                        <option value="Pilot Licenses">Pilot Licenses</option>
+                        <option value="Other Diploma">Other Diploma</option>
+                      </optgroup>
+                      <optgroup label="12th but not pursuing graduation">
+                        <option value="HSC">HSC</option>
+                      </optgroup>
+                      <optgroup label="10th but not pursuing 12th">
+                        <option value="SSC">SSC</option>
+                      </optgroup>
+                      <optgroup label="Other">
+                        <option value="Other">Other</option>
+                      </optgroup>
+                    </select>
+                    <div id="err-degrees" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-12">
+                  <div class="form-group has-feedback">
+                    <label for="education-details" class="control-label thin-label">Additional Education Details:</label>
+                    <textarea id="education-details" name="education-details" class="form-control input-sm"></textarea>
+                    <div id="err-education-details" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-12 margin-10">
+                  <h4 class="post-title">Profession Info</h4>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group has-feedback">
+                    <label for="occupation" class="control-label thin-label required">Occupation:<span class="red">*</span></label>
+                    <select id="occupation" name="occupation" class="form-control selectpicker" data-show-tick="true" data-tick-icon="fa fa-check" data-show-menu-arrow="true" data-select-on-tab="true">
+                      <option value="">Select One</option>
+                      <option value="Business">Business</option>
+                      <option value="Profession">Profession</option>
+                      <option value="Service">Service</option>
+                      <option value="Student">Student</option>
+                      <option value="Other">Other</option>
+                    </select>
+                    <div id="err-occupation" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group has-feedback">
+                    <label for="professional-sector" class="control-label thin-label">Professional Sector:</label>
+                    <select id="professional-sector" name="professional-sector" class="form-control selectpicker" data-show-tick="true" data-tick-icon="fa fa-check" data-show-menu-arrow="true" multiple>
+                      <option value="">Select One</option>
+                      <option value="Admin/Secretarial">Admin/Secretarial</option>
+                      <option value="Advertising/ Entertainment/ Media">Advertising/ Entertainment/ Media</option>
+                      <option value="Agriculture">Agriculture</option>
+                      <option value="Architecture & Design">Architecture & Design</option>
+                      <option value="Artists, Animators & Web Designers">Artists, Animators & Web Designers</option>
+                      <option value="Banking, Insurance & Financial Services">Banking, Insurance & Financial Services</option>
+                      <option value="Beauty, Fashion & Jewellery Designers">Beauty, Fashion & Jewellery Designers</option>
+                      <option value="Business Owner / Entrepreneur">Business Owner / Entrepreneur</option>
+                      <option value="Civil Services / Law Enforcement">Civil Services / Law Enforcement</option>
+                      <option value="Construction">Construction</option>
+                      <option value="Customer Service/ Call Centre/BPO">Customer Service/ Call Centre/BPO</option>
+                      <option value="Defence">Defence</option>
+                      <option value="Education / Training">Education / Training</option>
+                      <option value="Electronics">Electronics</option>
+                      <option value="Export / Import"> Export / Import</option>
+                      <option value="Finance and Accounts">Finance and Accounts</option>
+                      <option value="Government Employee">Government Employee</option>
+                      <option value="Health Care"> Health Care</option>
+                      <option value="Hotels / Restaurants">Hotels / Restaurants</option>
+                      <option value="Human Resource">Human Resource</option>
+                      <option value="IT">IT</option>
+                      <option value="Legal">Legal</option>
+                      <option value="Loss Prevention Manager">Loss Prevention Manager</option>
+                      <option value="Management / Corporate Professionals"> Management / Corporate Professionals</option>
+                      <option value="Manufacturing/ Engineering/ R&D">Manufacturing/ Engineering/ R&D</option>
+                      <option value="Marketing and Communications">Marketing and Communications</option>
+                      <option value="Merchant Navy">Merchant Navy</option>
+                      <option value="Non Working">Non Working</option>
+                      <option value="Oil & Gas">Oil & Gas</option>
+                      <option value="Others">Others</option>
+                      <option value="Pharmaceutical / Biotechnology">Pharmaceutical / Biotechnology</option>
+                      <option value="Purchase / Logistics / Supply chain">Purchase / Logistics / Supply chain</option>
+                      <option value="Real Estate"> Real Estate</option>
+                      <option value="Retail Chains">Retail Chains</option>
+                      <option value="Sales / Business Development">Sales / Business Development</option>
+                      <option value="Science">Science</option>
+                      <option value="Telecom / ISP">Telecom / ISP</option>
+                      <option value="Travel / Airlines">Travel / Airlines</option>
+                    </select>
+                    <div id="err-professional-sector" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group has-feedback">
+                    <label for="anuual-income" class="control-label thin-label">Annual Income:</label>
+                    <input type="number" id="annual-income" name="annual-income" class="form-control input-sm" />
+                    <div id="err-annual-income" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-12">
+                  <div class="form-group has-feedback">
+                    <label for="profession-details" class="control-label thin-label">Additional Profession Details:</label>
+                    <textarea id="profession-details" name="profession-details" class="form-control input-sm"></textarea>
+                    <div id="err-profession-details" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-12 margin-10">
+                  <h4 class="post-title">Family Info</h4>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group has-feedback">
+                    <label for="father-name" class="control-label thin-label required">Father's Name:<span class="red">*</span></label>
+                    <input type="text" id="father-name" name="father-name" class="form-control input-sm" />
+                    <div id="err-father-name" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group has-feedback">
+                    <label for="mother-name" class="control-label thin-label required">Mother's Name:<span class="red">*</span></label>
+                    <input type="text" id="mother-name" name="mother-name" class="form-control input-sm" />
+                    <div id="err-mother-name" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-3">
+                  <div class="form-group has-feedback">
+                    <label for="no-of-married-bro" class="control-label thin-label required">No of Married Brothers:<span class="red">*</span></label>
+                    <input type="number" id="no-of-married-bro" name="no-of-married-bro" class="form-control input-sm" />
+                    <div id="err-no-of-married-bro" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="form-group has-feedback">
+                    <label for="no-of-married-sis" class="control-label thin-label required">No of Married Sisters:<span class="red">*</span></label>
+                    <input type="number" id="no-of-married-sis" name="no-of-married-sis" class="form-control input-sm" />
+                    <div id="err-no-of-married-sis" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="form-group has-feedback">
+                    <label for="no-of-unmarried-bro" class="control-label thin-label required">No of Unmarried Brothers:<span class="red">*</span></label>
+                    <input type="number" id="no-of-unmarried-bro" name="no-of-unmarried-bro" class="form-control input-sm" />
+                    <div id="err-no-of-unmarried-bro" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="form-group has-feedback">
+                    <label for="no-of-unmarried-sis" class="control-label thin-label required">No of Unmarried Sisters:<span class="red">*</span></label>
+                    <input type="number" id="no-of-unmarried-sis" name="no-of-unmarried-sis" class="form-control input-sm" />
+                    <div id="err-no-of-unmarried-sis" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-12">
+                  <div class="form-group has-feedback">
+                    <label for="family-details" class="control-label thin-label">Additional Family Details:</label>
+                    <textarea id="family-details" name="family-details" class="form-control input-sm"></textarea>
+                    <div id="err-family-details" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-12 margin-10">
+                  <h4 class="post-title">Mosal Info</h4>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group has-feedback">
+                    <label for="mosal-name" class="control-label thin-label required">Mosal's Name:<span class="red">*</span></label>
+                    <input type="text" id="mosal-name" name="mosal-name" class="form-control input-sm" />
+                    <div id="err-mosal-name" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group has-feedback">
+                    <label for="mosal-native" class="control-label thin-label required">Mosal Native:<span class="red">*</span></label>
+                    <input type="text" id="mosal-native" name="mosal-native" class="form-control input-sm" />
+                    <div id="err-mosal-native" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-12 margin-10">
+                  <h4 class="post-title">Contact Info Info</h4>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group has-feedback">
+                    <label for="address" class="control-label thin-label required">Address:<span class="red">*</span></label>
+                    <textarea id="address" name="address" class="form-control input-sm"></textarea>
+                    <div id="err-address" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-4">
+                  <div class="form-group has-feedback">
+                    <label for="city" class="control-label thin-label">City:</label>
+                    <select id="city" name="city" class="form-control selectpicker" data-show-tick="true" data-tick-icon="fa fa-check" data-show-menu-arrow="true" data-live-search="true" data-select-on-tab="true">
+                      <option value="">Select One</option>
+                    </select>
+                    <div id="err-city" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group has-feedback">
+                    <label for="mobile-number" class="control-label thin-label required">Mobile Number:<span class="red">*</span></label>
+                    <input type="text" id="mobile-number" name="mobile-number" class="form-control input-sm" />
+                    <div id="err-mobile-number" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group has-feedback">
+                    <label for="email-id" class="control-label thin-label">Email Id:</label>
+                    <input type="text" id="email-id" name="email-id" class="form-control input-sm" />
+                    <div id="err-email-id" class="custom-error"></div>
+                  </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-12">
+                  <input id="btn-add-biodata" name="submit" type="submit" class="btn btn-primary btn-lg pull-right stretch-full-width" value="Add biodata">
+                  <input id="btn-reset" name="reset" type="reset" class="btn btn-default btn-lg stretch-full-width" value="Reset">
+                </div>
+              </form>
+              <div class="clearfix"></div>
+              <div class="col-md-12">
+                <div id="err-message" class="alert alert-error fade in hide"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@section scripts {
+  <script src="~/Scripts/moment.js"></script>
+  <script src="~/Theme/plugins/bootstrap-select-1.10.0/js/bootstrap-select.min.js"></script>
+  <script src="~/Theme/plugins/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
+  
+  @Scripts.Render("~/Scripts/custom/constants.js")
+  @Scripts.Render("~/Scripts/custom/root.js")
+  @Scripts.Render("~/Scripts/custom/addbiodata.js")
+}

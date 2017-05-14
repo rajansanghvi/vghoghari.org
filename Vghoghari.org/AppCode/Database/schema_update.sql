@@ -85,31 +85,95 @@ BEGIN
 END;
 CALL addIndex();
 
-create table if not exists  app_biodata_details
+drop procedure if exists addIndex;
+CREATE PROCEDURE addIndex() 
+BEGIN
+  if not exists(select 1 from information_schema.statistics where TABLE_NAME = 'app_countries' and index_NAME = 'idx_app_countries_name') then
+    create index idx_app_countries_name on app_countries(name);
+  end if;
+END;
+CALL addIndex();
+
+drop procedure if exists addIndex;
+CREATE PROCEDURE addIndex() 
+BEGIN
+  if not exists(select 1 from information_schema.statistics where TABLE_NAME = 'app_countries' and index_NAME = 'idx_app_countries_value') then
+    create index idx_app_countries_value on app_countries(value);
+  end if;
+END;
+CALL addIndex();
+
+drop procedure if exists addIndex;
+CREATE PROCEDURE addIndex() 
+BEGIN
+  if not exists(select 1 from information_schema.statistics where TABLE_NAME = 'app_states' and index_NAME = 'idx_app_states_name') then
+    create index idx_app_states_name on app_states(name);
+  end if;
+END;
+CALL addIndex();
+
+drop procedure if exists addIndex;
+CREATE PROCEDURE addIndex() 
+BEGIN
+  if not exists(select 1 from information_schema.statistics where TABLE_NAME = 'app_states' and index_NAME = 'idx_app_states_value') then
+    create index idx_app_states_value on app_states(value);
+  end if;
+END;
+CALL addIndex();
+
+drop procedure if exists addIndex;
+CREATE PROCEDURE addIndex() 
+BEGIN
+  if not exists(select 1 from information_schema.statistics where TABLE_NAME = 'app_cities' and index_NAME = 'idx_app_cities_name') then
+    create index idx_app_cities_name on app_cities(name);
+  end if;
+END;
+CALL addIndex();
+
+drop procedure if exists addIndex;
+CREATE PROCEDURE addIndex() 
+BEGIN
+  if not exists(select 1 from information_schema.statistics where TABLE_NAME = 'app_cities' and index_NAME = 'idx_app_cities_value') then
+    create index idx_app_cities_value on app_cities(value);
+  end if;
+END;
+CALL addIndex();
+
+drop procedure if exists addCol;
+CREATE PROCEDURE addCol() 
+BEGIN
+  if not exists(select 1 from information_schema.columns where TABLE_NAME = 'app_cities' and COLUMN_NAME = 'country_id') then
+    ALTER TABLE app_cities
+    Add country_id int(11) not null default 0
+    after state_id;
+  end if;
+END;
+call addCol();
+
+drop procedure if exists addIndex;
+CREATE PROCEDURE addIndex() 
+BEGIN
+  if not exists(select 1 from information_schema.statistics where TABLE_NAME = 'app_cities' and index_NAME = 'idx_app_cities_country_id') then
+    create index idx_app_cities_country_id on app_cities(country_id);
+  end if;
+END;
+CALL addIndex();
+
+create table if not exists  app_biodata_basic_infos
 (
   id int(11) auto_increment primary key
   , user_id int(11) not null
-  , code varchar(40) not null
-  , candidate_name varchar(255) not null
+  , code varchar(100) not null
+  , gender varchar(10) not null
+  , fullname varchar(255) not null
   , dob datetime not null
-  , birth_place varchar(255) not null
-  , height_feet tinyint(4) not null default 0
-  , height_inch tinyint(4) not null default 0
-  , weight float not null default 0
-  , blood_group tinyint(4) default 0
-  , manglik tinyint(4) default 0
-  , horoscope_match tinyint(4) default 0
-  , email_id varchar(255) null
-  , caste tinyint(4) not null default 0
-  , other_caste varchar(255) null
-  , native_place varchar(255) not null
-  , residence_addr varchar(1000) not null
-  , country varchar(500) null
-  , state varchar(500) null
-  , city varchar(500) null
-  , mobile_number varchar(20) null
-  , mosal varchar(255) null
-  , diet tinyint(4) not null default 0
+  , marital_status varchar(100) not null
+  , native varchar(500) not null
+  , birth_place varchar(500) null
+  , caste varchar(255) not null
+  , approval_status tinyint(4) not null default 1
+  , last_admin_action_by varchar(255) null
+  , last_admin_action_date datetime null
   , deleted tinyint(4) not null default 0
   , created_by varchar(255) not null
   , created_date datetime default now()
@@ -120,8 +184,8 @@ create table if not exists  app_biodata_details
 drop procedure if exists addIndex;
 CREATE PROCEDURE addIndex() 
 BEGIN
-  if not exists(select 1 from information_schema.statistics where TABLE_NAME = 'app_biodata_details' and index_NAME = 'idx_app_biodata_details_code') then
-    create index idx_app_biodata_details_code on app_biodata_details(code);
+  if not exists(select 1 from information_schema.statistics where TABLE_NAME = 'app_biodata_basic_infos' and index_NAME = 'idx_app_biodata_basic_infos_code') then
+    create index idx_app_biodata_basic_infos_code on app_biodata_basic_infos(code);
   end if;
 END;
 CALL addIndex();
@@ -129,50 +193,108 @@ CALL addIndex();
 drop procedure if exists addIndex;
 CREATE PROCEDURE addIndex() 
 BEGIN
-  if not exists(select 1 from information_schema.statistics where TABLE_NAME = 'app_biodata_details' and index_NAME = 'idx_app_biodata_details_user_id') then
-    create index idx_app_biodata_details_user_id on app_biodata_details(user_id);
+  if not exists(select 1 from information_schema.statistics where TABLE_NAME = 'app_biodata_basic_infos' and index_NAME = 'idx_app_biodata_basic_infos_user_id') then
+    create index idx_app_biodata_basic_infos_user_id on app_biodata_basic_infos(user_id);
   end if;
 END;
 CALL addIndex();
 
-create table if not exists app_biodata_education_details
+create table if not exists app_biodata_personal_infos
 (
   id int(11) auto_increment primary key
   , biodata_id int(11) not null
-  , highest_education tinyint(4) not null default 0
-  , degrees_secured varchar(1000) NULL
-  , college varchar(255) null
+  , height_ft tinyint(4) not null
+  , height_in tinyint(4) not null
+  , weight float null
+  , blood_group varchar(10) null
+  , manglik varchar(10) null
+  , horoscope_match varchar(10) null
+  , food_habits varchar(10) null
+) engine InnoDb;
+
+drop procedure if exists addIndex;
+CREATE PROCEDURE addIndex() 
+BEGIN
+  if not exists(select 1 from information_schema.statistics where TABLE_NAME = 'app_biodata_personal_infos' and index_NAME = 'idx_app_biodata_personal_infos_biodata_id') then
+    create index idx_app_biodata_personal_infos_biodata_id on app_biodata_personal_infos(biodata_id);
+  end if;
+END;
+CALL addIndex();
+
+create table if not exists app_biodata_education_infos
+(
+  id int(11) auto_increment primary key
+  , biodata_id int(11) not null
+  , education varchar(100) not null
+  , degrees_achieved varchar(1000) null
   , details varchar(1000) null
 )engine innoDb;
 
-create table if not exists app_biodata_occupation_details
-(
-  id int(11) auto_increment primary key
-  , biodata_id int(11) not null
-  , designation varchar(255) null
-  , occupation tinyint(4) not null
-  , details varchar(1000) null
-  , annual_income int(10) default 0
-) engine InnoDb;
+drop procedure if exists addIndex;
+CREATE PROCEDURE addIndex() 
+BEGIN
+  if not exists(select 1 from information_schema.statistics where TABLE_NAME = 'app_biodata_education_infos' and index_NAME = 'idx_app_biodata_education_infos_biodata_id') then
+    create index idx_app_biodata_education_infos_biodata_id on app_biodata_education_infos(biodata_id);
+  end if;
+END;
+CALL addIndex();
 
-create table if not exists app_biodata_family_details
+create table if not exists app_biodata_occupation_infos
 (
   id int(11) auto_increment primary key
   , biodata_id int(11) not null
-  , father_name varchar(255) null
-  , mother_name varchar(255) NULL
-  , designation varchar(255) NULL
-  , occupation tinyint(4) default 0
+  , occupation varchar(100) not null
+  , profession_sector varchar(1000) null
+  , annual_income decimal(10, 2) null
   , details varchar(1000) null
 ) engine InnoDb;
 
-create table if not exists app_biodata_sibbling_details
+drop procedure if exists addIndex;
+CREATE PROCEDURE addIndex() 
+BEGIN
+  if not exists(select 1 from information_schema.statistics where TABLE_NAME = 'app_biodata_occupation_infos' and index_NAME = 'idx_app_biodata_occupation_infos_biodata_id') then
+    create index idx_app_biodata_occupation_infos_biodata_id on app_biodata_occupation_infos(biodata_id);
+  end if;
+END;
+CALL addIndex();
+
+create table if not exists app_biodata_family_infos
 (
   id int(11) auto_increment primary key
   , biodata_id int(11) not null
-  , name varchar(255) not null
-  , married_to varchar(255) null
-  , son_daughter_of varchar(255) null
-  , native varchar(500) null
-  , deleted tinyint(4) not null default 0
+  , father_name varchar(255) not null
+  , mother_name varchar(255) not null
+  , no_of_married_bro tinyint(4) not null default 0
+  , no_of_married_sis tinyint(4) not null default 0
+  , no_of_unmarried_bro tinyint(4) not null default 0
+  , no_of_unmarried_sis tinyint(4) not null default 0
+  , details varchar(1000) null
 ) engine InnoDb;
+
+drop procedure if exists addIndex;
+CREATE PROCEDURE addIndex() 
+BEGIN
+  if not exists(select 1 from information_schema.statistics where TABLE_NAME = 'app_biodata_family_infos' and index_NAME = 'idx_app_biodata_family_infos_biodata_id') then
+    create index idx_app_biodata_family_infos_biodata_id on app_biodata_family_infos(biodata_id);
+  end if;
+END;
+CALL addIndex();
+
+create table if not exists app_biodata_contact_infos
+(
+  id int(11) auto_increment primary key
+  , biodata_id int(11) not null
+  , address varchar(1000) not null
+  , city varchar(500) null
+  , mobile_number varchar(20) not null,
+  email_id varchar(255) null
+) engine InnoDb;
+
+drop procedure if exists addIndex;
+CREATE PROCEDURE addIndex() 
+BEGIN
+  if not exists(select 1 from information_schema.statistics where TABLE_NAME = 'app_biodata_contact_infos' and index_NAME = 'idx_app_biodata_contact_infos_biodata_id') then
+    create index idx_app_biodata_contact_infos_biodata_id on app_biodata_contact_infos(biodata_id);
+  end if;
+END;
+CALL addIndex();
