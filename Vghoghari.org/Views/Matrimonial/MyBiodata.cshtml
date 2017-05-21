@@ -1,0 +1,334 @@
+﻿@model Vghoghari.org.Models.BiodataInfo
+
+@{
+  ViewBag.Title = "My Biodata Preview";
+}
+
+<!-- Start Nav Backed Header -->
+<div class="nav-backed-header parallax">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <ol class="breadcrumb">
+          <li>@Html.ActionLink("Home", "Index", "Home")</li>
+          <li class="active">Matrimonial</li>
+          <li class="active">Biodata</li>
+          <li class="active">Preview</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Nav Backed Header -->
+<!-- Start Page Header -->
+<div class="page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Biodata Preview</h1>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Page Header -->
+<div class="main" role="main">
+  <div id="content" class="content full">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <header class="single-post-header clearfix">
+            <h2 class="post-title">@string.Format("{0}\'s Biodata Preview", Model.BasicInfo.FullName)</h2>
+          </header>
+          <div class="post-content">
+            <div class="row">
+              <div class="col-md-6 margin-20">
+                @if (string.IsNullOrWhiteSpace(Model.ProfileImage)) {
+                  <div id="image-preview" style="background-image: url(@Url.Content("~/AppData/biodata/profile_images/avatars.png")); background-size: cover; background-position: center center"></div>
+}
+                else {
+                  <div id="image-preview" style="background-image: url(@Url.Content("~/AppData/biodata/profile_images/" + Model.ProfileImage + ".jpg")); background-size: cover; background-position: center center"></div>
+}
+              </div>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-xs-6 col-md-6 margin-15 key"><h5>Biodata Status<span class="pull-right">:</span></h5></div>
+                  @if (Model.ApprovalStatus == Vghoghari.org.AppCode.Models.Enum.enBiodataApprovalStatus.Incomplete) {
+                    <div class="col-xs-6 col-md-6 value"><h5>Incomplete</h5></div>
+}
+                  else if (Model.ApprovalStatus == Vghoghari.org.AppCode.Models.Enum.enBiodataApprovalStatus.Pending) {
+                    <div class="col-xs-6 col-md-6 value"><h5>Pending</h5></div>
+}
+                  else if (Model.ApprovalStatus == Vghoghari.org.AppCode.Models.Enum.enBiodataApprovalStatus.Approved) {
+                    <div class="col-xs-6 col-md-6 value"><h5>Approved</h5></div>
+}
+                  else if (Model.ApprovalStatus == Vghoghari.org.AppCode.Models.Enum.enBiodataApprovalStatus.Rejected) {
+                    <div class="col-xs-6 col-md-6 value"><h5>Rejected</h5></div>
+}
+
+                </div>
+                <div class="row">
+                  <div class="col-xs-6 col-md-6 margin-15 key"><h5>Gender<span class="pull-right">:</span></h5></div>
+                  <div class="col-xs-6 col-md-6 value"><h5>@Model.BasicInfo.Gender</h5></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-6 col-md-6 margin-15 key"><h5>Date of Birth<span class="pull-right">:</span></h5></div>
+                  <div class="col-xs-6 col-md-6 value"><h5>@Model.BasicInfo.Dob.ToString("dd-MM-yyyy")</h5></div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-6 col-md-6 margin-15 key"><h5>Birth Time<span class="pull-right">:</span></h5></div>
+                  <div class="col-xs-6 col-md-6 value"><h5>@Model.BasicInfo.Dob.ToString("HH:mm")</h5></div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-6 col-md-6 margin-15 key"><h5>Marital Status<span class="pull-right">:</span></h5></div>
+                  <div class="col-xs-6 col-md-6 value"><h5>@Model.BasicInfo.MaritalStatus</h5></div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-6 col-md-6 margin-15 key"><h5>Native<span class="pull-right">:</span></h5></div>
+                  <div class="col-xs-6 col-md-6 value"><h5>@Model.BasicInfo.Native</h5></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-6 col-md-6 margin-15 key"><h5>Birth Place<span class="pull-right">:</span></h5></div>
+                  @if (!string.IsNullOrWhiteSpace(Model.BasicInfo.BirthPlace)) {
+                    <div class="col-xs-6 col-md-6 value"><h5>@Model.BasicInfo.BirthPlace</h5></div>
+}
+                  else {
+                    <div class="col-xs-6 col-md-6 value"><h5>-----</h5></div>
+}
+                </div>
+                <div class="row">
+                  <div class="col-xs-6 col-md-6 margin-15 key"><h5>Caste<span class="pull-right">:</span></h5></div>
+                  <div class="col-xs-6 col-md-6 value"><h5>@Model.BasicInfo.Caste</h5></div>
+                </div>
+              </div>
+            </div>
+            <div class="row margin-15"></div>
+            <div class="row">
+              <div class="col-md-12 margin-10">
+                <h4 class="post-title">Personal Info</h4>
+              </div>
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-xs-6 col-md-3 key"><h6>Height<span class="pull-right">:</span></h6></div>
+                  <div class="col-xs-6 col-md-3 value"><h5>@Model.PersonalInfo.HeightFt ft @Model.PersonalInfo.HeightIn in</h5></div>
+
+                  <div class="col-xs-6 col-md-3 key"><h6>Weight<span class="pull-right">:</span></h6></div>
+                  @if (Model.PersonalInfo.Weight > 0) {
+                    <div class="col-xs-6 col-md-3 value"><h5>@Model.PersonalInfo.Weight kgs</h5></div>
+}
+                  else {
+                    <div class="col-xs-6 col-md-3 value"><h5>-----</h5></div>
+}
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-6 col-md-3 key"><h6>Blood Group<span class="pull-right">:</span></h6></div>
+                  @if (!string.IsNullOrWhiteSpace(Model.PersonalInfo.BloodGroup)) {
+                    <div class="col-xs-6 col-md-3 value"><h5>@Model.PersonalInfo.BloodGroup</h5></div>
+}
+                  else {
+                    <div class="col-xs-6 col-md-3 value"><h5>-----</h5></div>
+}
+
+                  <div class="col-xs-6 col-md-3 key"><h6>Food Habits<span class="pull-right">:</span></h6></div>
+                  @if (!string.IsNullOrWhiteSpace(Model.PersonalInfo.FoodHabits)) {
+                    <div class="col-xs-6 col-md-3 value"><h5>@Model.PersonalInfo.FoodHabits</h5></div>
+}
+                  else {
+                    <div class="col-xs-6 col-md-3 value"><h5>-----</h5></div>
+}
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-6 col-md-3 key"><h6>Manglik<span class="pull-right">:</span></h6></div>
+                  @if (!string.IsNullOrWhiteSpace(Model.PersonalInfo.Manglik)) {
+                    <div class="col-xs-6 col-md-3 value"><h5>@Model.PersonalInfo.Manglik</h5></div>
+}
+                  else {
+                    <div class="col-xs-6 col-md-3 value"><h5>-----</h5></div>
+}
+
+                  <div class="col-xs-6 col-md-3 key"><h6>Horoscope Match Required<span class="pull-right">:</span></h6></div>
+                  @if (!string.IsNullOrWhiteSpace(Model.PersonalInfo.FoodHabits)) {
+                    <div class="col-xs-6 col-md-3 value"><h5>@Model.PersonalInfo.HoroscopeMatch</h5></div>
+}
+                  else {
+                    <div class="col-xs-6 col-md-3 value"><h5>-----</h5></div>
+}
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row margin-15"></div>
+            <div class="row">
+              <div class="col-md-12 margin-10">
+                <h4 class="post-title">Education Info</h4>
+              </div>
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-xs-6 col-md-3 key"><h6>Education<span class="pull-right">:</span></h6></div>
+                  <div class="col-xs-6 col-md-3 value"><h5>@Model.EducationInfo.Education</h5></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-12 col-md-12 key"><h6>Degrees<span>:</span></h6></div>
+                  @if (!string.IsNullOrWhiteSpace(Model.EducationInfo.DegreesString)) {
+                    <div class="col-xs-12 col-md-12 value"><h5>@Model.EducationInfo.DegreesString</h5></div>
+}
+                  else {
+                    <div class="col-xs-12 col-md-12 value"><h5>-----</h5></div>
+}
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-12 col-md-12 key"><h6>Additional Education Details<span>:</span></h6></div>
+                  @if (!string.IsNullOrWhiteSpace(Model.EducationInfo.EducationDetails)) {
+                    <div class="col-xs-12 col-md-12 value"><h5>@Model.EducationInfo.EducationDetails</h5></div>
+}
+                  else {
+                    <div class="col-xs-12 col-md-12 value"><h5>-----</h5></div>
+}
+                </div>
+              </div>
+            </div>
+
+            <div class="row margin-15"></div>
+            <div class="row">
+              <div class="col-md-12 margin-10">
+                <h4 class="post-title">Occupation Info</h4>
+              </div>
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-xs-6 col-md-3 key"><h6>Occupation<span class="pull-right">:</span></h6></div>
+                  <div class="col-xs-6 col-md-3 value"><h5>@Model.OccupationInfo.Occupation</h5></div>
+
+                  <div class="col-xs-6 col-md-3 key"><h6>Annual Income<span class="pull-right">:</span></h6></div>
+                  @if (Model.OccupationInfo.AnnualIncome > 0) {
+                    <div class="col-xs-6 col-md-3 value"><h5>@Model.OccupationInfo.AnnualIncome</h5></div>
+}
+                  else {
+                    <div class="col-xs-6 col-md-3 value"><h5>-----</h5></div>
+}
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-12 col-md-12 key"><h6>Profession Sectors<span>:</span></h6></div>
+                  @if (!string.IsNullOrWhiteSpace(Model.OccupationInfo.ProfessionSectorString)) {
+                    <div class="col-xs-12 col-md-12 value"><h5>@Model.OccupationInfo.ProfessionSectorString</h5></div>
+}
+                  else {
+                    <div class="col-xs-12 col-md-12 value"><h5>-----</h5></div>
+}
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-12 col-md-12 key"><h6>Additional Professional Details<span>:</span></h6></div>
+                  @if (!string.IsNullOrWhiteSpace(Model.OccupationInfo.ProfessionDetails)) {
+                    <div class="col-xs-12 col-md-12 value"><h5>@Model.OccupationInfo.ProfessionDetails</h5></div>
+}
+                  else {
+                    <div class="col-xs-12 col-md-12 value"><h5>-----</h5></div>
+}
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row margin-15"></div>
+            <div class="row">
+              <div class="col-md-12 margin-10">
+                <h4 class="post-title">Family Info</h4>
+              </div>
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-xs-6 col-md-3 key"><h6>Father's Name<span class="pull-right">:</span></h6></div>
+                  <div class="col-xs-6 col-md-3 value"><h5>@Model.FamilyInfo.FatherName</h5></div>
+
+                  <div class="col-xs-6 col-md-3 key"><h6>Mother's Name<span class="pull-right">:</span></h6></div>
+                  <div class="col-xs-6 col-md-3 value"><h5>@Model.FamilyInfo.MotherName</h5></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-6 col-md-3 key"><h6>Married Brothers<span class="pull-right">:</span></h6></div>
+                  <div class="col-xs-6 col-md-3 value"><h5>@Model.FamilyInfo.NoOfMarriedBro</h5></div>
+
+                  <div class="col-xs-6 col-md-3 key"><h6>Married Sisters<span class="pull-right">:</span></h6></div>
+                  <div class="col-xs-6 col-md-3 value"><h5>@Model.FamilyInfo.NoOfMarriedSis</h5></div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-6 col-md-3 key"><h6>Unmarried Brothers<span class="pull-right">:</span></h6></div>
+                  <div class="col-xs-6 col-md-3 value"><h5>@Model.FamilyInfo.NoOfUnmarriedBro</h5></div>
+
+                  <div class="col-xs-6 col-md-3 key"><h6>Unmarried Sisters<span class="pull-right">:</span></h6></div>
+                  <div class="col-xs-6 col-md-3 value"><h5>@Model.FamilyInfo.NoOfUnmarriedSis</h5></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-12 col-md-12 key"><h6>Additional Family Details<span>:</span></h6></div>
+                  @if (!string.IsNullOrWhiteSpace(Model.FamilyInfo.FamilyDetails)) {
+                    <div class="col-xs-12 col-md-12 value"><h5>@Model.FamilyInfo.FamilyDetails</h5></div>
+}
+                  else {
+                    <div class="col-xs-12 col-md-12 value"><h5>-----</h5></div>
+}
+                </div>
+              </div>
+            </div>
+
+            <div class="row margin-15"></div>
+            <div class="row">
+              <div class="col-md-12 margin-10">
+                <h4 class="post-title">Mosal Info</h4>
+              </div>
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-xs-6 col-md-3 key"><h6>Mosal Family Name<span class="pull-right">:</span></h6></div>
+                  <div class="col-xs-6 col-md-3 value"><h5>@Model.MosalInfo.MosalName</h5></div>
+
+                  <div class="col-xs-6 col-md-3 key"><h6>Mosal Side Native<span class="pull-right">:</span></h6></div>
+                  <div class="col-xs-6 col-md-3 value"><h5>@Model.MosalInfo.MosalNative</h5></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row margin-15"></div>
+            <div class="row">
+              <div class="col-md-12 margin-10">
+                <h4 class="post-title">Contact Info</h4>
+              </div>
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-xs-12 col-md-12 key"><h6>Address<span>:</span></h6></div>
+                  <div class="col-xs-12 col-md-12 value"><h5>@Model.ContactInfo.Address</h5></div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xs-6 col-md-2 key"><h6>City<span class="pull-right">:</span></h6></div>
+                  @if (!string.IsNullOrWhiteSpace(Model.ContactInfo.City)) {
+                    <div class="col-xs-6 col-md-2 value"><h5>@Model.ContactInfo.City</h5></div>
+}
+                  else {
+                    <div class="col-xs-6 col-md-2 value"><h5>-----</h5></div>
+}
+
+                  <div class="col-xs-6 col-md-2 key"><h6>Mobile Number<span class="pull-right">:</span></h6></div>
+                  <div class="col-xs-6 col-md-2 value"><h5>@Model.ContactInfo.MobileNumber</h5></div>
+
+                  <div class="col-xs-6 col-md-2 key"><h6>Email Id<span class="pull-right">:</span></h6></div>
+                  @if (!string.IsNullOrWhiteSpace(Model.ContactInfo.EmailId)) {
+                    <div class="col-xs-6 col-md-2 value"><h5>@Model.ContactInfo.EmailId</h5></div>
+}
+                  else {
+                    <div class="col-xs-6 col-md-2 value"><h5>-----</h5></div>
+}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

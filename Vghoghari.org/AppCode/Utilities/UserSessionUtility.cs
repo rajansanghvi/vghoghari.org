@@ -39,8 +39,6 @@ namespace Vghoghari.org.AppCode.Utilities {
 
 		public static void CreateUserSession(string userName, string userData, bool createPersistentCookie, string strCookiePath) {
 			SetAuthCookie(userName, userData, createPersistentCookie, strCookiePath);
-			FormsAuthentication.RedirectFromLoginPage(userName, createPersistentCookie);
-			// HttpContext.Current.Response.Redirect(FormsAuthentication.GetRedirectUrl(userName, createPersistentCookie));
 		}
 
 		public static void SetAuthCookie(string userName, string userData, bool createPersistentCookie, string strCookiePath) {
@@ -91,25 +89,5 @@ namespace Vghoghari.org.AppCode.Utilities {
 
 			return timeout;
 		}
-
-		//public static void AttachRolesToUser() {
-		//	IPrincipal user = HttpContext.Current.User;
-
-		//	if (user != null && user.Identity.IsAuthenticated && user.Identity is FormsIdentity) {
-		//		FormsIdentity id = (FormsIdentity) user.Identity;
-		//		FormsAuthenticationTicket ticket = (id.Ticket);
-
-		//		if (!FormsAuthentication.CookiesSupported) {
-		//			//If cookie is not supported for forms authentication, then the authentication ticket
-		//			// is stored in the Url, which is encrypted. So, decrypt it
-		//			ticket = FormsAuthentication.Decrypt(id.Ticket.Name);
-		//		}
-
-		//		// Get the stored user-data, in this case, user roles
-		//		if (!string.IsNullOrEmpty(ticket.UserData)) {
-		//			HttpContext.Current.User = new System.Security.Principal.GenericPrincipal(id, ticket.UserData.Split(','));
-		//		}
-		//	}
-		//}
 	}
 }

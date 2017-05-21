@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-
+	
 	$('#dob').datetimepicker({
 		format: 'YYYY-MM-DD',
 		useCurrent: false,
@@ -44,6 +44,10 @@
 		$('#city').selectpicker('refresh');
 	});
 
+	if (code !== '' && code !== undefined && code !== null) {
+		fetchBiodata(code);
+	}
+
 	// gender
 	$('#gender').on('hidden.bs.select', function (e) {
 		e.preventDefault();
@@ -75,7 +79,7 @@
 
 		let fullname = $('#fullname').val().trim();
 		if (!validateFullname(fullname)) { // if not valid
-			handleValidationError('fullname', 'This is a required field. It can contain only alphabets (A to Z) or (a to z) and spaces.');
+			handleValidationError('fullname', 'This is a required field. It can contain only alphabets (A to Z or a to z) and spaces.');
 		}
 		else { // if valid
 			$('#fullname').parent().addClass('has-success');
@@ -313,7 +317,7 @@
 
 		let fatherName = $('#father-name').val().trim();
 		if (!validateFullname(fatherName)) { // if not valid
-			handleValidationError('father-name', 'This is a required field. It can contain only alphabets (A to Z) or (a to z) and spaces.');
+			handleValidationError('father-name', 'This is a required field. It can contain only alphabets (A to Z or a to z) and spaces.');
 		}
 		else { // if valid
 			$('#father-name').parent().addClass('has-success');
@@ -338,7 +342,7 @@
 
 		let motherName = $('#mother-name').val().trim();
 		if (!validateFullname(motherName)) { // if not valid
-			handleValidationError('mother-name', 'This is a required field. It can contain only alphabets (A to Z) or (a to z) and spaces.');
+			handleValidationError('mother-name', 'This is a required field. It can contain only alphabets (A to Z or a to z) and spaces.');
 		}
 		else { // if valid
 			$('#mother-name').parent().addClass('has-success');
@@ -463,7 +467,7 @@
 
 		let mosalName = $('#mosal-name').val().trim();
 		if (!validateFullname(mosalName)) { // if not valid
-			handleValidationError('mosal-name', 'This is a required field. It can contain only alphabets (A to Z) or (a to z) and spaces.');
+			handleValidationError('mosal-name', 'This is a required field. It can contain only alphabets (A to Z or a to z) and spaces.');
 		}
 		else { // if valid
 			$('#mosal-name').parent().addClass('has-success');
@@ -538,7 +542,7 @@
 
 		let mobileNumber = $('#mobile-number').val();
 		if (!validateMobileNumber(mobileNumber)) { // if not valid
-			handleValidationError('mobile-number', 'This is a required field. It can only start with 7, 8 or 9 and must have exactly 10 digits.');
+			handleValidationError('mobile-number', 'This is a required field. It can start with 7, 8 or 9 and must have exactly 10 digits.');
 		}
 		else { // if valid
 			$('#mobile-number').parent().addClass('has-success');
@@ -680,16 +684,16 @@ function addBiodata() {
 	let horoscopeMatch = $('#horoscope-match').val().trim();
 	let foodHabits = $('#food-habits').val().trim();
 	let education = $('#education').val().trim();
-	let degrees = $('#degrees').val().trim();
+	let degrees = $('#degrees').val();
 	let educationDetails = $('#education-details').val().trim();
 	let occupation = $('#occupation').val().trim();
-	let professionSector = $('#professional-sector').val().trim();
+	let professionSector = $('#professional-sector').val();
 	let annualIncome = $('#annual-income').val();
 	let professionDetails = $('#profession-details').val().trim();
 	let fatherName = $('#father-name').val().trim();
 	let motherName = $('#mother-name').val().trim();
 	let noOfMarriedBro = $('#no-of-married-bro').val();
-	let noOfMarriedSis = $('#no-of-married-sis').val()
+	let noOfMarriedSis = $('#no-of-married-sis').val();
 	let noOfUnmarriedBro = $('#no-of-unmarried-bro').val();
 	let noOfUnmarriedSis = $('#no-of-unmarried-sis').val();
 	let familyDetails = $('#family-details').val().trim();
@@ -707,7 +711,7 @@ function addBiodata() {
 
 	if (!validateFullname(fullname)) { // if not valid
 		isValid = false;
-		handleValidationError('fullname', 'This is a required field. It can contain only alphabets (A to Z) or (a to z) and spaces.');
+		handleValidationError('fullname', 'This is a required field. It can contain only alphabets (A to Z or a to z) and spaces.');
 	}
 
 	if (!validateDob(dob)) { // if not valid
@@ -768,12 +772,12 @@ function addBiodata() {
 
 	if (!validateFullname(fatherName)) { // if not valid
 		isValid = false;
-		handleValidationError('father-name', 'This is a required field. It can contain only alphabets (A to Z) or (a to z) and spaces.');
+		handleValidationError('father-name', 'This is a required field. It can contain only alphabets (A to Z or a to z) and spaces.');
 	}
 
 	if (!validateFullname(motherName)) { // if not valid
 		isValid = false;
-		handleValidationError('mother-name', 'This is a required field. It can contain only alphabets (A to Z) or (a to z) and spaces.');
+		handleValidationError('mother-name', 'This is a required field. It can contain only alphabets (A to Z or a to z) and spaces.');
 	}
 
 	if (!validateNumber(noOfMarriedBro)) { // if not valid
@@ -786,7 +790,7 @@ function addBiodata() {
 		handleValidationError('no-of-married-sis', 'This is a required field. Please enter a valid number.');
 	}
 
-	if (!validateNumber(noOfunmarriedBro)) { // if not valid
+	if (!validateNumber(noOfUnmarriedBro)) { // if not valid
 		isValid = false;
 		handleValidationError('no-of-unmarried-bro', 'This is a required field. Please enter a valid number.');
 	}
@@ -798,7 +802,7 @@ function addBiodata() {
 
 	if (!validateFullname(mosalName)) { // if not valid
 		isValid = false;
-		handleValidationError('mosal-name', 'This is a required field. It can contain only alphabets (A to Z) or (a to z) and spaces.');
+		handleValidationError('mosal-name', 'This is a required field. It can contain only alphabets (A to Z or a to z) and spaces.');
 	}
 
 	if (!validateText(mosalNative)) { // if not valid
@@ -813,7 +817,7 @@ function addBiodata() {
 
 	if (!validateMobileNumber(mobileNumber)) { // if not valid
 		isValid = false;
-		handleValidationError('mobile-number', 'This is a required field. It can only start with 7, 8 or 9 and must have exactly 10 digits.');
+		handleValidationError('mobile-number', 'This is a required field. It can start with 7, 8 or 9 and must have exactly 10 digits.');
 	}
 
 	if (!validateEmailId(emailId)) { // if not valid
@@ -823,14 +827,43 @@ function addBiodata() {
 	
 	if (isValid) {
 		let dataObject = new Object();
+		dataObject.Gender = gender;
 		dataObject.FullName = fullname;
-		dataObject.Username = username;
-		dataObject.Password = password;
-		dataObject.ConfirmedPassword = confirmPassword;
+		dataObject.Dob = dob;
+		dataObject.BirthTime = birthtime;
+		dataObject.MaritalStatus = maritalStatus;
+		dataObject.Native = native;
+		dataObject.BirthPlace = birthPlace;
+		dataObject.Caste = caste;
+		dataObject.HeightFt = heightFt;
+		dataObject.HeightIn = heightIn;
+		dataObject.Weight = weight;
+		dataObject.BloodGroup = bloodGroup;
+		dataObject.Manglik = manglik;
+		dataObject.HoroscopeMatch = horoscopeMatch;
+		dataObject.FoodHabits = foodHabits;
+		dataObject.Education = education;
+		dataObject.Degrees = degrees;
+		dataObject.EducationDetails = educationDetails;
+		dataObject.Occupation = occupation;
+		dataObject.ProfessionSector = professionSector;
+		dataObject.AnnualIncome = annualIncome;
+		dataObject.ProfessionDetails = professionDetails;
+		dataObject.FatherName = fatherName;
+		dataObject.MotherName = motherName;
+		dataObject.NoOfMarriedBro = noOfMarriedBro;
+		dataObject.NoOfMarriedSis = noOfMarriedSis;
+		dataObject.NoOfUnmarriedBro = noOfUnmarriedBro;
+		dataObject.NoOfUnmarriedSis = noOfUnmarriedSis;
+		dataObject.FamilyDetails = familyDetails;
+		dataObject.MosalName = mosalName;
+		dataObject.MosalNative = mosalNative;
+		dataObject.Address = address;
+		dataObject.City = city;
 		dataObject.MobileNumber = mobileNumber;
 		dataObject.EmailId = emailId;
 
-		let url = '../api/External/Register';
+		let url = '../api/MatrimonialApi/Add';
 
 		$.ajax({
 			method: 'POST'
@@ -839,7 +872,7 @@ function addBiodata() {
 			, dataType: 'json'
 			, data: JSON.stringify(dataObject)
 			, success: function (data, textStatus, jqXhr) {
-				$(location).attr('href', '../User/Login');
+				$(location).attr('href', '../Matrimonial/Upload?code=' + data);
 			}
 			, error: function (jqXhr, textStatus, errorThrown) {
 				console.log(jqXhr);
@@ -847,10 +880,9 @@ function addBiodata() {
 					$('#err-message').html(jqXhr.responseJSON.Message);
 					$('#err-message').removeClass('hide');
 				}
-				else if (jqXhr.status === 409) {
-					$('#err-message').html(jqXhr.responseJSON);
-					$('#err-message').removeClass('hide');
-				}
+				else if (jqXhr.status === 401) {
+					$(location).attr('href', '../User/Login');
+				} 
 				else {
 					handleInternalServerError();
 				}
@@ -858,7 +890,8 @@ function addBiodata() {
 		});
 	}
 	else {
-
+		$('#err-message').html('There are some data validation errors in the biodata details sent. Please correct the errors and try again later. Thank you!');
+		$('#err-message').removeClass('hide');
 	}
 }
 

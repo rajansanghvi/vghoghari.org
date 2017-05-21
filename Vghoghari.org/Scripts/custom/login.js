@@ -124,7 +124,8 @@ function login() {
 		});
 	}
 	else {
-
+		$('#err-message').html('There are some data validation errors in the login credential sent. Please correct the errors and try again later. Thank you!');
+		$('#err-message').removeClass('hide');
 	}
 }
 

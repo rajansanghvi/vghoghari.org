@@ -1,0 +1,77 @@
+﻿@{
+  ViewBag.Title = "Biodata Profile Picture";
+}
+
+<!-- Start Nav Backed Header -->
+<div class="nav-backed-header parallax">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <ol class="breadcrumb">
+          <li>@Html.ActionLink("Home", "Index", "Home")</li>
+          <li class="active">Matrimonial</li>
+          <li class="active">Biodata</li>
+          <li class="active">Profile Picture</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Nav Backed Header -->
+<!-- Start Page Header -->
+<div class="page-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Upload Profile Picture</h1>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Page Header -->
+<div class="main" role="main">
+  <div id="content" class="content full">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <header class="single-post-header clearfix">
+            <h2 class="post-title">Upload Your Biodata Profile Picture!</h2>
+          </header>
+          <div class="post-content">
+            <div class="row">
+              <form id="newBiodataForm" name="newBiodataForm" class="contact-form">
+                <div class="col-md-12 margin-15 text-warning">
+                  <p class="text-center">Want to manage your existing biodatas? @Html.ActionLink("Click here", "Manage", "Matrimonial", null, new { @class = "no-underline" }) to view the list.</p>
+                </div>
+                <div class="col-md-12 margin-15 text-info">
+                  <p class="text-center">You can upload only image files with extension .jpg, .jpeg, .png</p>
+                </div>
+                
+                <div class="margin-20" id="image-preview">
+                  <label for="image-upload" id="image-label">Choose File</label>
+                  <input type="file" name="image" id="image-upload" />
+                </div>
+
+                <div class="col-md-12">
+                  <div id="err-message" class="margin-15 alert alert-error fade in hide"></div>
+                </div>
+
+                <div class="col-md-12" id="upload-section">
+                  <input id="btn-upload-image" name="submit" type="submit" class="btn btn-primary btn-lg stretch-full-width" value="Upload Image">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@section scripts {  
+  <script src="~/Theme/plugins/image-upload/jquery-uploadPreview.min.js"></script>
+
+  @Scripts.Render("~/Scripts/custom/constants.js")
+  @Scripts.Render("~/Scripts/custom/root.js")
+  @Scripts.Render("~/Scripts/custom/uploadProfile.js")
+}

@@ -1,12 +1,45 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using static Vghoghari.org.AppCode.Models.Enum;
 
 namespace Vghoghari.org.Models {
+	public class BiodataInfo {
+		[JsonIgnore]
+		public int Id { get; set; }
+		public string Code { get; set; }
+		public enBiodataApprovalStatus ApprovalStatus { get; set; }
+		[JsonIgnore]
+		public int UserId { get; set; }
+		public string ProfileImage { get; set; }
+
+		public BasicInfo BasicInfo { get; set; }
+		public PersonalInfo PersonalInfo { get; set; }
+		public EducationInfo EducationInfo { get; set; }
+		public OccupationInfo OccupationInfo { get; set; }
+		public FamilyInfo FamilyInfo { get; set; }
+		public MosalInfo MosalInfo { get; set; }
+		public ContactInfo ContactInfo { get; set; }
+
+		public BiodataInfo() {
+			Id = 0;
+			Code = string.Empty;
+			ApprovalStatus = enBiodataApprovalStatus.Pending;
+			BasicInfo = new BasicInfo();
+			PersonalInfo = new PersonalInfo();
+			EducationInfo = new EducationInfo();
+			OccupationInfo = new OccupationInfo();
+			FamilyInfo = new FamilyInfo();
+			MosalInfo = new MosalInfo();
+			ContactInfo = new ContactInfo();
+		}
+	}
+
 	public class BasicInfo {
 		public string Gender { get; set; }
-		public string Fullname { get; set; }
+		public string FullName { get; set; }
 		public DateTime Dob { get; set; }
 		public string MaritalStatus { get; set; }
 		public string Native { get; set; }
@@ -15,8 +48,8 @@ namespace Vghoghari.org.Models {
 
 		public BasicInfo() {
 			Gender = string.Empty;
-			Fullname = string.Empty;
-			Dob = DateTime.Today;
+			FullName = string.Empty;
+			Dob = new DateTime(1970, 1, 1);
 			MaritalStatus = string.Empty;
 			Native = string.Empty;
 			BirthPlace = string.Empty;
@@ -46,27 +79,35 @@ namespace Vghoghari.org.Models {
 
 	public class EducationInfo {
 		public string Education { get; set; }
-		public string Degrees { get; set; }
+		public List<string> Degrees { get; set; }
 		public string EducationDetails { get; set; }
+
+		[JsonIgnore]
+		public string DegreesString { get; set; }
 
 		public EducationInfo() {
 			Education = string.Empty;
-			Degrees = string.Empty;
+			Degrees = new List<string>();
 			EducationDetails = string.Empty;
+			DegreesString = string.Empty;
 		}
 	}
 
 	public class OccupationInfo {
 		public string Occupation { get; set; }
-		public string ProfessionSector { get; set; }
+		public List<string> ProfessionSector { get; set; }
 		public decimal AnnualIncome { get; set; }
 		public string ProfessionDetails { get; set; }
 
+		[JsonIgnore]
+		public string ProfessionSectorString { get; set; }
+
 		public OccupationInfo() {
 			Occupation = string.Empty;
-			ProfessionSector = string.Empty;
+			ProfessionSector = new List<string>();
 			AnnualIncome = 0;
 			ProfessionDetails = string.Empty;
+			ProfessionSectorString = string.Empty;
 		}
 	}
 
@@ -87,6 +128,30 @@ namespace Vghoghari.org.Models {
 			NoOfUnmarriedBro = 0;
 			NoOfUnmarriedSis = 0;
 			FamilyDetails = string.Empty;
-		} 
+		}
+	}
+
+	public class MosalInfo {
+		public string MosalName { get; set; }
+		public string MosalNative { get; set; }
+
+		public MosalInfo() {
+			MosalName = string.Empty;
+			MosalNative = string.Empty;
+		}
+	}
+
+	public class ContactInfo {
+		public string Address { get; set; }
+		public string City { get; set; }
+		public string MobileNumber { get; set; }
+		public string EmailId { get; set; }
+
+		public ContactInfo() {
+			Address = string.Empty;
+			City = string.Empty;
+			MobileNumber = string.Empty;
+			EmailId = string.Empty;
+		}
 	}
 }

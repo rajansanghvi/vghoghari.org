@@ -23,7 +23,7 @@
 	$('#fullname').focusout(function (e) {
 		let fullname = $('#fullname').val();
 		if (!validateFullname(fullname)) { // if not valid
-			handleValidationError('fullname', 'This is a required field. It can contain only alphabets (A to Z) or (a to z) and spaces.');
+			handleValidationError('fullname', 'This is a required field. It can contain only alphabets (A to Z or a to z) and spaces.');
 		}
 		else { // if valid
 			$('#fullname').parent().addClass('has-success');
@@ -45,7 +45,7 @@
 	$('#mobile-number').focusout(function (e) {
 		let mobileNumber = $('#mobile-number').val();
 		if (!validateMobileNumber(mobileNumber)) { // if not valid
-			handleValidationError('mobile-number', 'This is a required field. It can start only with 7, 8 or 9 and can have exactly 10 digtis.');
+			handleValidationError('mobile-number', 'This is a required field. It can start with 7, 8 or 9 and can have exactly 10 digtis.');
 		}
 		else { // if valid
 			$('#mobile-number').parent().addClass('has-success');
@@ -138,7 +138,7 @@
 		let password = $('#password').val();
 		let confirmPassword = $('#confirm-password').val();
 		if (!validateConfirmedPassword(password, confirmPassword)) { // if not valid			
-			handleValidationError('confirm-password', 'This is a required field. It should match exactly the value entered in the password field');
+			handleValidationError('confirm-password', 'This is a required field. It should exactly match the value entered in the password field.');
 		}
 		else { // if valid
 			$('#confirm-password').parent().addClass('has-success');
@@ -293,7 +293,8 @@ function registerUser() {
 		});
 	}
 	else {
-
+		$('#err-message').html('There are some data validation errors in the registration data sent. Please correct the errors and try again later. Thank you!');
+		$('#err-message').removeClass('hide');
 	}
 }
 

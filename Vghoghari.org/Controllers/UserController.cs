@@ -28,11 +28,10 @@ namespace Vghoghari.org.Controllers {
 		}
 
 		[HttpGet]
-		[WebAuthorize]
-		public void Logout() {
+		public ActionResult Logout() {
 			UserBL.Logout(AuthenticatedUser.SessionId);
 			FormsAuthentication.SignOut();
-			FormsAuthentication.RedirectToLoginPage();
+			return RedirectToAction("Login", "User");
 		}
 	}
 }

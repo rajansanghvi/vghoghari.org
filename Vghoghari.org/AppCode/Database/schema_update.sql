@@ -171,13 +171,14 @@ create table if not exists  app_biodata_basic_infos
   , native varchar(500) not null
   , birth_place varchar(500) null
   , caste varchar(255) not null
+  , profile_image varchar(255) null
   , approval_status tinyint(4) not null default 1
   , last_admin_action_by varchar(255) null
   , last_admin_action_date datetime null
   , deleted tinyint(4) not null default 0
   , created_by varchar(255) not null
   , created_date datetime default now()
-  , modified_name varchar(255) null
+  , modified_by varchar(255) null
   , modified_date datetime null
 ) engine InnoDb;
 
@@ -280,6 +281,22 @@ BEGIN
 END;
 CALL addIndex();
 
+create table if not exists app_biodata_mosal_infos
+(
+  id int(11) auto_increment primary key
+  , biodata_id int(11) not null
+  , mosal_name varchar(255) not null
+) engine InnoDb;
+
+drop procedure if exists addIndex;
+CREATE PROCEDURE addIndex() 
+BEGIN
+  if not exists(select 1 from information_schema.statistics where TABLE_NAME = 'app_biodata_mosal_infos' and index_NAME = 'idx_app_biodata_mosal_infos_biodata_id') then
+    create index idx_app_biodata_mosal_infos_biodata_id on app_biodata_mosal_infos(biodata_id);
+  end if;
+END;
+CALL addIndex();
+
 create table if not exists app_biodata_contact_infos
 (
   id int(11) auto_increment primary key
@@ -298,3 +315,4 @@ BEGIN
   end if;
 END;
 CALL addIndex();
+

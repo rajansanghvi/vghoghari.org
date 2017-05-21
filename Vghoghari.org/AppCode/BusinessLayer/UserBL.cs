@@ -11,7 +11,7 @@ using static Vghoghari.org.AppCode.Models.Enum;
 namespace Vghoghari.org.AppCode.BusinessLayer {
 	public class UserBL {
 		private static readonly string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.ToString();
-		private const string REGEX_FULLNAME = @"^(-?([A-Z].\s)?([A-Z][a-z]+)\s?)+([A-Z]'([A-Z][a-z]+))?$";
+		private const string REGEX_FULLNAME = @"^(-?([A-Z].\s)?([A-Z][a-z]*)\s?)+([A-Z]'([A-Z][a-z]*))?$";
 		private const string REGEX_USERNAME = @"^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$";
 		private const string REGEX_PASSWORD = @"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$";
 		private const string REGEX_MOBILE_NUMBER = @"^[789]\d{9}$";

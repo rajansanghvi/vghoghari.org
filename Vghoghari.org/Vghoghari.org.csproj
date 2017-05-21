@@ -82,6 +82,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -145,16 +146,19 @@
   <ItemGroup>
     <Compile Include="AppCode\Attributes\WebAuthorizeAttribute.cs" />
     <Compile Include="AppCode\BusinessLayer\AppBL.cs" />
+    <Compile Include="AppCode\BusinessLayer\MatrimonialBL.cs" />
     <Compile Include="AppCode\BusinessLayer\SessionBL.cs" />
     <Compile Include="AppCode\BusinessLayer\UserBL.cs" />
     <Compile Include="AppCode\DataLayer\AppDL.cs" />
     <Compile Include="AppCode\DataLayer\GlobalDL.cs" />
+    <Compile Include="AppCode\DataLayer\MatrimonialDL.cs" />
     <Compile Include="AppCode\DataLayer\SessionDL.cs" />
     <Compile Include="AppCode\DataLayer\UserDL.cs" />
     <Compile Include="AppCode\Models\Enum.cs" />
     <Compile Include="AppCode\Models\Struts.cs" />
     <Compile Include="AppCode\Models\User.cs" />
     <Compile Include="AppCode\Attributes\ApiAuthorizeAttribute.cs" />
+    <Compile Include="AppCode\Utilities\Constants.cs" />
     <Compile Include="AppCode\Utilities\DateUtility.cs" />
     <Compile Include="AppCode\Utilities\UserSessionUtility.cs" />
     <Compile Include="AppCode\Utilities\Utility.cs" />
@@ -257,6 +261,7 @@
     <Content Include="Scripts\custom\addbiodata.js" />
     <Content Include="Scripts\custom\register.js" />
     <Content Include="Scripts\custom\root.js" />
+    <Content Include="Scripts\custom\uploadProfile.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
@@ -403,6 +408,7 @@
     <Content Include="Theme\plugins\fullcalendar\lib\jquery.min.js" />
     <Content Include="Theme\plugins\fullcalendar\lib\moment.min.js" />
     <Content Include="Theme\plugins\fullcalendar\license.txt" />
+    <Content Include="Theme\plugins\image-upload\jquery-uploadPreview.min.js" />
     <Content Include="Theme\plugins\mediaelement\background.png" />
     <Content Include="Theme\plugins\mediaelement\bigplay.png" />
     <Content Include="Theme\plugins\mediaelement\bigplay.svg" />
@@ -566,6 +572,8 @@
     <Content Include="Views\Error\Internal.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Matrimonial\Add.cshtml" />
+    <Content Include="Views\Matrimonial\Upload.cshtml" />
+    <Content Include="Views\Matrimonial\MyBiodata.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
