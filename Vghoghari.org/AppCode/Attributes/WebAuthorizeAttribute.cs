@@ -35,9 +35,9 @@ namespace Vghoghari.org.AppCode.Attributes {
 					string deviceId = userDetails.DeviceId;
 					string authkey = userDetails.AuthKey;
 					string sessionId = userDetails.SessionId;
-					int userType = userDetails.UserType;
+					List<enUserType> userTypes = userDetails.UserTypes;
 
-					User authenticatedUser = AuthenticateUser(deviceId, authkey, sessionId, (enUserType) userType);
+					User authenticatedUser = AuthenticateUser(deviceId, authkey, sessionId, userTypes);
 
 					if (authenticatedUser != null) {
 						if(filterContext.Controller.GetType().IsSubclassOf(typeof(BaseController))) {
@@ -55,10 +55,10 @@ namespace Vghoghari.org.AppCode.Attributes {
 			filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "User", action = "Login" }));
 		}
 
-		private User AuthenticateUser(string deviceId, string authKey, string sessionId, enUserType userType) {
+		private User AuthenticateUser(string deviceId, string authKey, string sessionId, List<enUserType> userTypes) {
 
 			User authenticatedUser = UserBL.AuthenticateUser(deviceId, authKey, sessionId);
-			if (authenticatedUser.Id > 0 && authenticatedUser.UserType == userType) {
+			if (authenticatedUser.Id > 0 && authenticatedUser.UserTypes.Count != 0) {
 				return authenticatedUser;
 			}
 			return null;

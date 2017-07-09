@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Transactions;
 using System.Web;
 using Vghoghari.org.AppCode.DataLayer;
 using Vghoghari.org.AppCode.Models;
@@ -11,7 +12,7 @@ using static Vghoghari.org.AppCode.Models.Enum;
 namespace Vghoghari.org.AppCode.BusinessLayer {
 	public class UserBL {
 		private static readonly string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.ToString();
-		private const string REGEX_FULLNAME = @"^(-?([A-Z].\s)?([A-Z][a-z]*)\s?)+([A-Z]'([A-Z][a-z]*))?$";
+		private const string REGEX_FULLNAME = @"^(-?([A-Za-z].\s)?([A-Za-z][A-Za-z]*)\s?)+([A-Za-z]'([A-Za-z][A-Za-z]*))?$";
 		private const string REGEX_USERNAME = @"^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$";
 		private const string REGEX_PASSWORD = @"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$";
 		private const string REGEX_MOBILE_NUMBER = @"^[789]\d{9}$";
@@ -19,13 +20,13 @@ namespace Vghoghari.org.AppCode.BusinessLayer {
 
 		private static enRegistrationResponse ValidateRegistrationData(string fullName, string username, string password, string confirmedPassword, string mobileNumber, string emailId) {
 
-			// Fullname can consists only alphabets. this regex is not case sensitive
+			// Fullname can consists only alphabets
 			if (string.IsNullOrWhiteSpace(fullName)
-				|| !Regex.IsMatch(fullName, REGEX_FULLNAME, RegexOptions.IgnoreCase)) {
+				|| !Regex.IsMatch(fullName, REGEX_FULLNAME)) {
 				return enRegistrationResponse.DataValidationError;
 			}
 
-			// Usernames can contain characters a-z, 0-9, underscores and periods. The username cannot start with a period nor end with a period. It must also not have more than one period sequentially. Max length is 30 chars.
+			// Usernames can contain characters a-z, A-Z, 0-9, underscores and periods. The username cannot start with a period nor end with a period. It must also not have more than one period sequentially. Max length is 30 chars.
 			if (string.IsNullOrWhiteSpace(username)
 				|| !Regex.IsMatch(username, REGEX_USERNAME)) {
 				return enRegistrationResponse.DataValidationError;
@@ -90,14 +91,25 @@ namespace Vghoghari.org.AppCode.BusinessLayer {
 			if (response != enRegistrationResponse.Ok) {
 				return response;
 			}
-
-			// By default all users that register to the website are created with User Role
-			enUserType userType = enUserType.User; 
+			
 			string hashedPassword = Utility.GetMd5Hash(password);
 			KeyValuePair<string, string> appKeys = GenerateUniqueAppKeys();
-			
-			int userId = UserDL.AddUserDetails(fullName, username, hashedPassword, appKeys.Key, appKeys.Value, userType, mobileNumber, emailId);
 
+			TransactionScope ts = new TransactionScope(TransactionScopeOption.Required);
+			int userId = 0;
+			try {
+				using(ts) {
+					userId = UserDL.AddUserDetails(fullName, username, hashedPassword, appKeys.Key, appKeys.Value, mobileNumber, emailId);
+
+					UserDL.AddUserType(userId, enUserType.User);
+					ts.Complete();
+				}
+			}
+			catch(Exception e) {
+				ts.Dispose();
+				throw e;
+			}
+			
 			if (userId > 0) {
 				return enRegistrationResponse.Ok;
 			}
@@ -130,13 +142,15 @@ namespace Vghoghari.org.AppCode.BusinessLayer {
 			string hashedPassword = Utility.GetMd5Hash(password);
 			User user = UserDL.FetchUser(username, hashedPassword);
 
-			if(user == null) {
+			if(user.Id == 0) {
 				return new KeyValuePair<enLoginResponse, User>(enLoginResponse.UserNotFound, null);
 			}
 
 			if(user.Deleted) {
 				return new KeyValuePair<enLoginResponse, User>(enLoginResponse.UserInactive, null);
 			}
+
+			user.UserTypes = UserDL.FetchUserTypesForUser(user.Id);
 
 			return new KeyValuePair<enLoginResponse, User>(enLoginResponse.Ok, user);
 		}

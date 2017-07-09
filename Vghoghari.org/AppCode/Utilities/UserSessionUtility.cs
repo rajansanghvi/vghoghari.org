@@ -23,15 +23,15 @@ namespace Vghoghari.org.AppCode.Utilities {
 			session.UserId = user.Id;
 			session.SessionId = Guid.NewGuid().ToString();
 			session.UserAgent = HttpContext.Current.Request.UserAgent;
-			session.IssuedDate = DateTime.UtcNow;
-			session.ExpiryDate = session.IssuedDate.AddDays(30); // Server side session is issued for 30days after sign up
+			session.IssuedDate = DateTime.Now;
+			session.ExpiryDate = session.IssuedDate.Date.AddDays(30); // Server side session is issued for 30days after sign up
 			SessionBL.CreateSession(session);
 
 			dynamic userData = new {
 				Username = user.Username,
 				DeviceId = user.DeviceId,
 				AuthKey = user.AuthKey,
-				UserType = user.UserType,
+				UserTypes  = user.UserTypes,
 				SessionId = session.SessionId
 			};
 			CreateUserSession(user.Username, JsonConvert.SerializeObject(userData), isPersistent, string.Empty);

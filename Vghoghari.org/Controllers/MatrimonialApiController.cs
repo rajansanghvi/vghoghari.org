@@ -173,7 +173,7 @@ namespace Vghoghari.org.Controllers {
 		[HttpGet]
 		[ApiAuthorize]
 		public IHttpActionResult GetMyBiodata(string code) {
-			BiodataInfo biodataInfo = MatrimonialBL.GetMyBiodata(AuthenticatedUser.Id, -);
+			BiodataInfo biodataInfo = MatrimonialBL.GetMyBiodata(AuthenticatedUser.Id, code);
 			if(biodataInfo.Id > 0) {
 				return Ok(biodataInfo);
 			}

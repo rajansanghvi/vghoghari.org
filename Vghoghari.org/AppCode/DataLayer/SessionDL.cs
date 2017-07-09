@@ -9,7 +9,7 @@ namespace Vghoghari.org.AppCode.DataLayer {
 	internal class SessionDL {
 		private static readonly string className = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.ToString();
 
-		internal static int DeleteSessions(int userId, string modifiedBy) {
+		internal static int DeleteSessions(int userId, string modifiedBy = "system") {
 			const string sql = @"update    app_sessions
 														set       deleted = 1
 																			, modified_by = ?modifiedBy
@@ -39,7 +39,7 @@ namespace Vghoghari.org.AppCode.DataLayer {
 			return dl.ExecuteSqlNonQuery(Utility.ConnectionString, sql);
 		}
 
-		internal static int AddSession(Session session, string createdBy) {
+		internal static int AddSession(Session session, string createdBy = "system") {
 			const string sql = @"insert into app_sessions
 														(user_id, session_id, expiry_date, user_agent, deleted, created_by, created_date, modified_by, modified_date)
 														values

@@ -16,7 +16,7 @@ namespace Vghoghari.org.AppCode.Models {
 		public string DeviceId { get; set; }
 		public string AuthKey { get; set; }
 		public string SessionId { get; set; }
-		public enUserType UserType { get; set; }
+		public List<enUserType> UserTypes { get; set; }
 		public string MobileNumber { get; set; }
 		public string EmailId { get; set; }
 		public bool Deleted { get; set; }
@@ -28,7 +28,7 @@ namespace Vghoghari.org.AppCode.Models {
 			DeviceId = string.Empty;
 			AuthKey = string.Empty;
 			SessionId = string.Empty;
-			UserType = enUserType.User;
+			UserTypes = new List<enUserType>();
 			MobileNumber = string.Empty;
 			EmailId = string.Empty;
 			Deleted = false;

@@ -2,7 +2,7 @@
 var URL = window.location.host;
 var BASEURL = PROTOCOL + '//' + URL;
 
-var REGEX_FULLNAME = /^(-?([A-Z].\s)?([A-Z][a-z]*)\s?)+([A-Z]'([A-Z][a-z]*))?$/i;
+var REGEX_FULLNAME = /^(-?([A-Za-z].\s)?([A-Za-z][A-Za-z]*)\s?)+([A-Za-z]'([A-Za-z][A-Za-z]*))?$/;
 var REGEX_USERNAME = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/;
 var REGEX_PASSWORD = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 var REGEX_MOBILE_NUMBER = /^[789]\d{9}$/;

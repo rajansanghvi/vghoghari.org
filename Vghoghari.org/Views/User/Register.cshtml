@@ -1,5 +1,5 @@
 ﻿@{
-  ViewBag.Title = "New User Registration";
+  ViewBag.Title = "User Registration";
 }
 
 <!-- Start Nav Backed Header -->
@@ -10,7 +10,7 @@
         <ol class="breadcrumb">
           <li>@Html.ActionLink("Home", "Index", "Home")</li>
           <li class="active">User</li>
-          <li class="active">Register</li>
+          <li class="active">Registration</li>
         </ol>
       </div>
     </div>
@@ -22,7 +22,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h1>New User Registration</h1>
+        <h1>User Registration</h1>
       </div>
     </div>
   </div>
@@ -33,80 +33,56 @@
   <div id="content" class="content full">
     <div class="container">
       <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-12">
           <header class="single-post-header clearfix">
             <h2 class="post-title">Register Now!</h2>
           </header>
           <div class="post-content">
             <div class="row">
-              <form id="userRegistrationForm" name="userRegistrationForm" class="contact-form">
+              <form id="userRegistrationForm" name="userRegistrationForm" role="form" data-toggle="validator">
                 <div class="col-md-12 margin-15 text-warning">
                   <p class="text-center">Already registered? @Html.ActionLink("Click here", "Login", "User", null, new { @class = "no-underline"}) to go to the login page.</p>
                 </div> 
-                <div class="col-md-12 margin-15 text-info">
+                <div class="col-md-12 text-info">
                   <p class="text-center">All fields marked with * are compulsory. Please fill in the required details and register yourselves.</p>
                 </div>
-                <div class="col-md-6 margin-15">
-                  <div class="form-group">
-                    <input type="text" id="username" name="username" class="form-control input-lg" placeholder="Username*">
-                    <div class="custom-error" id="err-username"></div>
+                <div class="col-md-6">
+                  <div class="form-group has-feedback">
+                    <input type="text" id="username" name="username" class="form-control input-lg" placeholder="Username *" data-required-error="This is a mandatory input field." pattern="^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$" data-pattern-error="This field can contain alphabets (A to Z or a to z), digits (0 to 9), underscores (_) and periods (.). It can not start or end with a period (.) and can not have more than one period (.) sequentially. Max length possible is 30 characters." required>
+                    <div class="help-block with-errors custom-error" id="err-username"></div>
                   </div>
-                  <div class="form-group">
-                    <input type="password" id="password" name="password" class="form-control input-lg" placeholder="Password*">
-                    <div class="custom-error" id="err-password"></div>
+                  <div class="form-group has-feedback">
+                    <input type="password" id="password" name="password" class="form-control input-lg" placeholder="Password *" data-required-error="This is a mandatory input field." pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" data-pattern-error="This field must contain atleast one upper level alphabet (A to Z), one lower level alphabet (a to z), one digit (0 to 9) and can have any special character. Minimum length required is 8 characteres." required>
+                    <div class="help-block with-errors custom-error" id="err-password"></div>
                   </div>
-                  <div class="form-group">
-                    <input type="password" id="confirm-password" name="confirm-password" class="form-control input-lg" placeholder="Confirm Password*">
-                    <div class="custom-error" id="err-confirm-password"></div>
+                  <div class="form-group has-feedback">
+                    <input type="password" id="confirm-password" name="confirm-password" class="form-control input-lg" placeholder="Confirm Password *" data-required-error="This is a mandatory input field." data-match="#password" data-error="This field should match the password field above." required>
+                    <div class="help-block with-errors custom-error" id="err-confirm-password"></div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group has-feedback">
-                    <input type="text" id="fullname" name="fullname" class="form-control input-lg" placeholder="Fullname*">
-                    <div class="custom-error" id="err-fullname"></div>
+                    <input type="text" id="fullname" name="fullname" class="form-control input-lg" placeholder="Fullname *" data-required-error="This is a mandatory input field." pattern="^(-?([A-Za-z].\s)?([A-Za-z][A-Za-z]*)\s?)+([A-Za-z]'([A-Za-z][A-Za-z]*))?$" data-pattern-error="This field can contain only alphabets (A to Z) or (a to z) and spaces." required>
+                    <div class="help-block with-errors custom-error" id="err-fullname"></div>
                   </div>
                   <div class="form-group has-feedback">
-                    <input type="number" id="mobile-number" name="mobile-number" class="form-control input-lg" placeholder="Mobile Number*">
-                    <div class="custom-error" id="err-mobile-number"></div>
+                    <input type="text" id="mobile-number" name="mobile-number" class="form-control input-lg" placeholder="Mobile Number *" data-required-error="This is a mandatory input field." pattern="^[789]\d{9}$" data-pattern-error="This field can start only with 7, 8 or 9 and can have exactly 10 digtis." required>
+                    <div class="help-block with-errors custom-error" id="err-mobile-number"></div>
                   </div>
                   <div class="form-group has-feedback">
                     <input type="email" id="email-id" name="email-id" class="form-control input-lg" placeholder="Email Id">
+                    <div class="help-block with-errors custom-error" id="err-email-id"></div>
                   </div>
-                  <div class="custom-error" id="err-email-id"></div>
-                </div>
-                <div class="col-md-12">
-                  <input id="btn-regiter" name="submit" type="submit" class="btn btn-primary btn-lg pull-right stretch-full-width" value="Register now">
-                  <input id="btn-reset" name="reset" type="reset" class="btn btn-default btn-lg stretch-full-width" value="Reset">
                 </div>
               </form>
-              <div class="clearfix"></div>
               <div class="col-md-12">
-                <div id="err-message" class="alert alert-error fade in hide"></div>
+                <div id="err-message" class="alert alert-error fade in hide custom-error"></div>
+              </div>
+              <div class="col-md-12">
+                <button form="userRegistrationForm" id="btn-regiter" name="register" type="submit" class="btn btn-primary btn-lg pull-right stretch-full-width"> Register </button>
+                <button form="userRegistrationForm" id="btn-reset" name="reset" type="reset" class="btn btn-default btn-lg stretch-full-width"> Reset </button>
               </div>
             </div>
-          </div>
-        </div>
-        <!-- Start Sidebar -->
-        <div class="col-md-3 sidebar">
-          <!-- Recent Posts Widget -->
-          <div class="widget-recent-posts widget">
-            <div class="sidebar-widget-title">
-              <h3>Recent Posts</h3>
-            </div>
-            <ul>
-              <li class="clearfix">
-                <a href="#" class="media-box post-image"> <img src="http://placehold.it/800x600&amp;text=IMAGE+PLACEHOLDER" alt="" class="img-thumbnail"> </a>
-                <div class="widget-blog-content"><a href="#">Voluptatum deleniti atque corrupti voluptatum deleniti atque corrupti</a> <span class="meta-data"><i class="fa fa-calendar"></i> on 17th Dec, 2013</span> </div>
-              </li>
-              <li class="clearfix">
-                <a href="#" class="media-box post-image"> <img src="http://placehold.it/800x600&amp;text=IMAGE+PLACEHOLDER" alt="" class="img-thumbnail"> </a>
-                <div class="widget-blog-content"><a href="#">Voluptatum deleniti atque corrupti</a> <span class="meta-data"><i class="fa fa-calendar"></i> on 17th Dec, 2013</span> </div>
-              </li>
-              <li class="clearfix">
-                <a href="#" class="media-box post-image"> <img src="http://placehold.it/800x600&amp;text=IMAGE+PLACEHOLDER" alt="" class="img-thumbnail"> </a>
-                <div class="widget-blog-content"><a href="#">Voluptatum deleniti atque corrupti voluptatum deleniti atque corrupti</a> <span class="meta-data"><i class="fa fa-calendar"></i> on 17th Dec, 2013</span> </div>
-              </li>
-            </ul>
           </div>
         </div>
       </div>
@@ -115,6 +91,7 @@
 </div>
 
 @section scripts {
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
   @Scripts.Render("~/Scripts/custom/constants.js")
   @Scripts.Render("~/Scripts/custom/root.js")
   @Scripts.Render("~/Scripts/custom/register.js")

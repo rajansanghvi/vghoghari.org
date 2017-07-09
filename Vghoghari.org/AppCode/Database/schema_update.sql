@@ -6,7 +6,6 @@
   , hashed_password varchar(255) not null
   , device_id varchar(25) not null
   , auth_key varchar(40) not null
-  , user_type tinyint(4) not null default 1
   , mobile_number varchar(20) not null
   , email_id varchar(255) null
   , deleted tinyint(4) default 0
@@ -40,6 +39,36 @@ CREATE PROCEDURE addIndex()
 BEGIN
   if not exists(select 1 from information_schema.statistics where TABLE_NAME = 'app_users' and index_NAME = 'idx_app_users_device_id_auth_key') then
     create index idx_app_users_device_id_auth_key on app_users(device_id, auth_key);
+  end if;
+END;
+CALL addIndex();
+
+create table app_user_types
+(
+  id int(11) AUTO_INCREMENT primary key
+  , user_id int(11) not null
+  , user_type tinyint(4) default 1
+  , deleted tinyint(4) DEFAULT 0
+  , created_by varchar(255) not null
+  , created_date datetime default now()
+  , modified_by varchar(255) null
+  , modified_date datetime null
+)engine innoDb;
+
+drop procedure if exists addIndex;
+CREATE PROCEDURE addIndex() 
+BEGIN
+  if not exists(select 1 from information_schema.statistics where TABLE_NAME = 'app_user_types' and index_NAME = 'idx_app_user_types_user_id') then
+    create index idx_app_user_types_user_id on app_user_types(user_id);
+  end if;
+END;
+CALL addIndex();
+
+drop procedure if exists addIndex;
+CREATE PROCEDURE addIndex() 
+BEGIN
+  if not exists(select 1 from information_schema.statistics where TABLE_NAME = 'app_user_types' and index_NAME = 'idx_app_user_types_user_id_user_type') then
+    create index idx_app_user_types_user_id_user_type on app_user_types(user_id, user_type);
   end if;
 END;
 CALL addIndex();
