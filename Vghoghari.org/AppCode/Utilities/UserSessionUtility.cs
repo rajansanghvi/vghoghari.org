@@ -67,8 +67,8 @@ namespace Vghoghari.org.AppCode.Utilities {
 			FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
 					1,
 					userName,
-					DateTime.UtcNow,
-					DateTime.UtcNow.AddMinutes(expirationMinutes),
+					DateTime.Now,
+					DateTime.Now.AddMinutes(expirationMinutes),
 					createPersistentCookie,
 					userData,
 					cookiePath
